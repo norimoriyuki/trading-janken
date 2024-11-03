@@ -4,7 +4,6 @@ import { choices, ChoiceType, Choice } from "./choices";
 
 interface JankenGameScreenProps {
   onBackClick: () => void;
-  updateResults: (result: "win" | "lose" | "draw") => void;
   playerChoices: ChoiceType[];
 }
 
@@ -20,7 +19,7 @@ function getResult(player: Choice, computer: Choice): "win" | "lose" | "draw" {
   return "lose";
 }
 
-export default function JankenGameScreen({ onBackClick, updateResults, playerChoices }: JankenGameScreenProps) {
+export default function JankenGameScreen({ onBackClick, playerChoices }: JankenGameScreenProps) {
   const [computerChoices, setComputerChoices] = useState<ChoiceType[]>([]);
   //const [computerChoiceIndex, setComputerChoiceIndex] = useState<number>(0);
   const [showDescription, setShowDescription] = useState<string | null>(null);
@@ -51,8 +50,7 @@ export default function JankenGameScreen({ onBackClick, updateResults, playerCho
 
     // 勝敗判定
     const result = getResult(playerChoice.name, computerChoice.name);
-    updateResults(result);
-
+    
     if (result === "win") {
       setWinCount((prev) => prev + 1);
     } else if (result === "lose") {
