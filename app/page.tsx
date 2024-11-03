@@ -9,11 +9,6 @@ export default function Home() {
   //const [results, setResults] = useState({ win: 0, lose: 0, draw: 0 });
   const [playerChoices, setPlayerChoices] = useState<ChoiceType[]>([]);
 
-  const getRandomChoices = (array: ChoiceType[], count: number): ChoiceType[] => {
-    const shuffled = [...array].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
-
   useEffect(() => {
     setPlayerChoices(choices.slice(0, 3));
   }, [choices]);
