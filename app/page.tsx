@@ -15,8 +15,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setPlayerChoices(getRandomChoices(choices, 3));
-  }, []);
+    setPlayerChoices(choices.slice(0, 3));
+  }, [choices]);
 
   const handleStartClick = () => setIsStartScreen(false);
   const handleBackClick = () => setIsStartScreen(true);

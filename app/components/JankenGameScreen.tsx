@@ -32,7 +32,13 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [winCount, setWinCount] = useState<number>(0);
 
   const getRandomChoices = (array: ChoiceType[], count: number): ChoiceType[] => {
-    const shuffled = [...array].sort(() => Math.random() - 0.5);
+    const opponentChoice = array[0]; // 相手の手を配列の最初の要素と仮定
+  
+    // 配列を複製し、相手の手を複数回追加
+    const expandedArray = [...array, opponentChoice, opponentChoice, opponentChoice]; // 必要に応じて重複数を調整
+  
+    // 配列をシャッフルし、ランダムな要素を選択
+    const shuffled = expandedArray.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
   };
 
@@ -50,7 +56,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
     // 勝敗判定
     const result = getResult(playerChoice.name, computerChoice.name);
-    
+
     if (result === "win") {
       setWinCount((prev) => prev + 1);
     } else if (result === "lose") {
