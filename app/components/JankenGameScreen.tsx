@@ -22,7 +22,7 @@ function getResult(player: Choice, computer: Choice): "win" | "lose" | "draw" {
 
 export default function JankenGameScreen({ onBackClick, updateResults, playerChoices }: JankenGameScreenProps) {
   const [computerChoices, setComputerChoices] = useState<ChoiceType[]>([]);
-  const [computerChoiceIndex, setComputerChoiceIndex] = useState<number>(0);
+  //const [computerChoiceIndex, setComputerChoiceIndex] = useState<number>(0);
   const [showDescription, setShowDescription] = useState<string | null>(null);
   const [playerChoicesState, setPlayerChoicesState] = useState<ChoiceType[]>(playerChoices);
   const [showResult, setShowResult] = useState<{ playerChoice: ChoiceType; computerChoice: ChoiceType; result: string } | null>(null);
@@ -44,7 +44,7 @@ export default function JankenGameScreen({ onBackClick, updateResults, playerCho
   const handlePlayerChoice = (playerIndex: number) => {
     // ランダムにコンピュータのインデックスを選ぶ
     const randomComputerIndex = Math.floor(Math.random() * computerChoices.length);
-    setComputerChoiceIndex(randomComputerIndex);
+    //setComputerChoiceIndex(randomComputerIndex);
 
     const playerChoice = playerChoicesState[playerIndex];
     const computerChoice = computerChoices[randomComputerIndex];
