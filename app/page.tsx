@@ -6,7 +6,7 @@ import { choices, ChoiceType } from "./components/choices"; // インポート
 
 export default function Home() {
   const [isStartScreen, setIsStartScreen] = useState(true);
-  const [results, setResults] = useState({ win: 0, lose: 0, draw: 0 });
+  //const [results, setResults] = useState({ win: 0, lose: 0, draw: 0 });
   const [playerChoices, setPlayerChoices] = useState<ChoiceType[]>([]);
 
   const getRandomChoices = (array: ChoiceType[], count: number): ChoiceType[] => {
@@ -21,9 +21,9 @@ export default function Home() {
   const handleStartClick = () => setIsStartScreen(false);
   const handleBackClick = () => setIsStartScreen(true);
 
-  const updateResults = (result: "win" | "lose" | "draw") => {
-    setResults((prev) => ({ ...prev, [result]: prev[result] + 1 }));
-  };
+  //const updateResults = (result: "win" | "lose" | "draw") => {
+    //setResults((prev) => ({ ...prev, [result]: prev[result] + 1 }));
+  //};
 
   return (
     <div style={{ height: "100vh", width: "100%", overflowY: "scroll", backgroundColor: "#ccc", display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -50,7 +50,6 @@ export default function Home() {
         ) : (
           <JankenGameScreen
             onBackClick={handleBackClick}
-            updateResults={updateResults}
             playerChoices={playerChoices}
           />
         )}
