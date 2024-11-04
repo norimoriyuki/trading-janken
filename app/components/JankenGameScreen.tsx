@@ -104,8 +104,45 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const closeDescription = () => setShowDescription(null);
   const closeResult = () => setShowResult(null);
 
+  const handleForfeit = () => {
+    setLife(0);
+    setShowScoreWindow(true);
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+
+      <div style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        backgroundColor: "black",
+        color: "white",
+        padding: "10px 0",
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+        {/* 降参ボタンを左端に配置 */}
+        <button 
+          onClick={handleForfeit} 
+          style={{ 
+            color: "white", 
+            background: "transparent", 
+            border: "none", 
+            cursor: "pointer", 
+            position: "absolute",
+            left: "20px" 
+          }}
+        >
+          降参
+        </button>
+
+        {/* タイトルを中央に配置 */}
+        <div>Trading Janken</div>
+      </div>
 
       <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
         {computerChoices.map((choice, index) => (

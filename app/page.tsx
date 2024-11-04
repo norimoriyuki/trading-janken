@@ -37,7 +37,7 @@ export default function Home() {
       >
         {isStartScreen ? (
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h1>トレーディングじゃんけん</h1>
+            <h1>Trading Janken</h1>
             <button onClick={handleStartClick} style={{ marginTop: "20px", padding: "10px 20px" }}>
               スタート
             </button>

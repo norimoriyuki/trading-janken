@@ -52,6 +52,8 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
           <button onClick={handleSubmitScore} style={{ padding: "10px 20px" }}>
             スコアを登録（まだ
           </button>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
           <button onClick={closeScoreWindow} style={{ padding: "10px 20px" }}>
             戻る
           </button>
