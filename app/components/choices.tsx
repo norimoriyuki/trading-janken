@@ -10,7 +10,7 @@ export interface ChoiceType {
     { name: "グー", img: "/rock.png", description: "グーはチョキに勝ちます。" },
     { name: "チョキ", img: "/scissors.png", description: "チョキはパーに勝ちます。" },
     { name: "パー", img: "/paper.png", description: "パーはグーに勝ちます。" },
-    { name: "バリアー", img: "/barrier.png", description: "バリアーはどの手ともあいこになります。" },
+    //{ name: "バリアー", img: "/barrier.png", description: "バリアーはどの手ともあいこになります。" },
   ];
   
   export type Choice = typeof choices[number]["name"];

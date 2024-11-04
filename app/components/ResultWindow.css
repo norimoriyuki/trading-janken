@@ -1,0 +1,84 @@
+/* Overlay の背景 */
+.overlay {
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 内側のカードコンテナ */
+  .result-window {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    text-align: center;
+  }
+  
+  .result-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .result-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    animation: fadeInAndScale 0.7s ease forwards;
+  }
+  
+  /* アニメーション */
+  @keyframes slideInFromTop {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInAndScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .choice-player {
+    animation: slideInFromBottom 0.5s ease forwards;
+  }
+  
+  .choice-computer {
+    animation: slideInFromTop 0.5s ease forwards;
+  }
+  
