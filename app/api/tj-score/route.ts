@@ -2,20 +2,30 @@ import { db } from '@vercel/postgres';
 
 const client = await db.connect();
 
-/*export async function GET() {
+export async function GET() {
     try {
         // 投稿データを新着順に取得
         const { rows } = await client.sql`
-            SELECT * FROM test_board ORDER BY date DESC;
+            SELECT t, user_name, score FROM tj_score ORDER BY score DESC LIMIT 20;
         `;
+    
+        const formattedRows = rows.map(row => ({
+            ...row,
+            date: new Date(row.t).toLocaleDateString("ja-JP", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                timeZone: "Asia/Tokyo"
+            })
+        }));
 
-        return new Response(JSON.stringify({ posts: rows }), {
+        return new Response(JSON.stringify({ posts: formattedRows }), {
             headers: { 'Content-Type': 'application/json' },
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Failed to fetch posts' }), { status: 500 });
+        return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'An unexpected error occurred' }), { status: 500 });
     }
-}*/
+}
 
 export async function POST(request: Request) {
     try {
