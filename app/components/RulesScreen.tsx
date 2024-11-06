@@ -5,21 +5,26 @@ interface RulesScreenProps {
 }
 
 const RulesScreen: React.FC<RulesScreenProps> = ({ onBackClick }) => {
-  const dummyRules = `
-    Trading Jankenのルール:
+  const dummyRules = `Trading Janken:
+        ルール
     
-    1. このゲームはグー、チョキ、パーのじゃんけんをベースにしています。
-    2. プレイヤーは、3つの手札から一つを選択し、コンピュータと対戦します。
-    3. 勝利条件:
-       - グーはチョキに勝つ。
-       - チョキはパーに勝つ。
-       - パーはグーに勝つ。
-    4. プレイヤーは勝利するたびにスコアが加算されます。
-    5. ライフがゼロになるとゲームオーバーとなり、スコアが登録されます。
-    6. 特殊カード「バリアー」は一度だけ使用でき、引き分けを保証します。
-
-    これらのルールを守って楽しんでください！
+    1. じゃんけんベースのゲームです
+    　　- あなたが手を選ぶと相手はランダムに手を出します
+    2. 出した手は相手が出した手と交換されます
+    3. 勝か負けるかすると相手は新しい相手が登場します
+    4. グーチョキパーの特殊手もあるので、手に入ったらうまく活用しましょう
+    5. 5点のライフがなくなったらゲーム終了、それまでの合計勝ち数で記録を目指してください！
   `;
+
+    const opelation =`
+        【PC】
+        左クリック：カードを選ぶ
+        右クリック：カード詳細を表示
+        【スマホ】
+        タップ：カードを選ぶ
+        長押し：カード詳細を表示
+
+        `;
 
   return (
     <div
@@ -49,6 +54,24 @@ const RulesScreen: React.FC<RulesScreenProps> = ({ onBackClick }) => {
       >
         {dummyRules}
       </div>
+      <h1 style={{ marginBottom: "20px" }}>操作</h1>
+      <div
+        style={{
+          backgroundColor: "#fff",
+          color: "#333",
+          padding: "20px",
+          borderRadius: "10px",
+          maxWidth: "90%",
+          maxHeight: "60%",
+          overflowY: "auto",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          textAlign: "left",
+          whiteSpace: "pre-line",
+        }}
+      >
+        {opelation}
+      </div>
+
       <button
         onClick={onBackClick}
         style={{
