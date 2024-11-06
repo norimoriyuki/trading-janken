@@ -31,6 +31,6 @@ export async function POST(request: Request) {
             headers: { 'Content-Type': 'application/json' },
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Failed to add post' }), { status: 500 });
+        return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'An unexpected error occurred' }), { status: 500 });
     }
 }
