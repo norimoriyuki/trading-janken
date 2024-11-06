@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import JankenGameScreen from "./components/JankenGameScreen";
-import ScoreboardScreen from "./components/ScoreboardScreen"; // スコアボード画面コンポーネント
-import RulesScreen from "./components/RulesScreen"; // ルール画面コンポーネント
+import ScoreboardScreen from "./components/ScoreboardScreen";
+import RulesScreen from "./components/RulesScreen";
 import { choices, ChoiceType } from "./components/choices";
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
           width: "100%",
           maxWidth: "500px",
           aspectRatio: "9 / 16",
-          backgroundColor: "#6b8e23",
+          backgroundColor: "#2a7fbe",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -45,17 +45,73 @@ export default function Home() {
         }}
       >
         {screen === "start" && (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "80%" }}>
             <h1>Trading Janken</h1>
-            <button onClick={handleStartClick} style={{ marginTop: "20px", padding: "10px 20px" }}>
+
+            {/* スタートボタン */}
+            <button
+              onClick={handleStartClick}
+              style={{
+                marginTop: "20px",
+                padding: "15px 30px",
+                fontSize: "1.2rem",
+                backgroundColor: "#ff9800",
+                color: "white",
+                border: "none",
+                borderRadius: "10px",
+                cursor: "pointer",
+                width: "100%",
+                fontWeight: "bold",
+                transition: "background-color 0.3s, transform 0.2s",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e68900")}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff9800")}
+              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.98)")}
+              onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            >
               スタート
             </button>
-            <button onClick={handleScoreboardClick} style={{ marginTop: "10px", padding: "10px 20px" }}>
-              スコアボード
-            </button>
-            <button onClick={handleRulesClick} style={{ marginTop: "10px", padding: "10px 20px" }}>
-              ルール
-            </button>
+
+            {/* スコアボードとルールボタン */}
+            <div style={{ display: "flex", width: "100%", gap: "10px", marginTop: "20px" }}>
+              <button
+                onClick={handleScoreboardClick}
+                style={{
+                  padding: "10px",
+                  fontSize: "1rem",
+                  backgroundColor: "#4caf50",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  flex: 1,
+                  transition: "background-color 0.3s",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#388e3c")}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4caf50")}
+              >
+                スコアボード
+              </button>
+
+              <button
+                onClick={handleRulesClick}
+                style={{
+                  padding: "10px",
+                  fontSize: "1rem",
+                  backgroundColor: "#4caf50",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                  flex: 1,
+                  transition: "background-color 0.3s",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#388e3c")}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4caf50")}
+              >
+                ルール
+              </button>
+            </div>
           </div>
         )}
 
