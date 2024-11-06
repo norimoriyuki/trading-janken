@@ -27,7 +27,7 @@ export default function Home() {
           width: "100%",
           maxWidth: "500px",
           aspectRatio: "9 / 16",
-          backgroundColor: "green",
+          backgroundColor: "#6b8e23",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

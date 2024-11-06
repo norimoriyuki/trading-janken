@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface ScoreWindowProps {
   winCount: number;
-  playerName: string;
-  setPlayerName: (name: string) => void;
-  handleSubmitScore: () => void;
   closeScoreWindow: () => void;
 }
 
 const ScoreWindow: React.FC<ScoreWindowProps> = ({
   winCount,
-  playerName,
-  setPlayerName,
-  handleSubmitScore,
   closeScoreWindow,
 }) => {
+  const [playerName, setPlayerName] = useState<string>("");
+
+  // スコアをサーバーに送信する関数
+  const submitScore = async () => {
+    const payload = { user_name: playerName, score: winCount };
+
+    try {
+      const response = await fetch("/api/tj-score", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // スコア送信が成功したらタイトル画面に戻る
+        closeScoreWindow();
+      } else {
+        console.error("Failed to submit score");
+      }
+    } catch (error) {
+      console.error("An error occurred while submitting the score", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -49,8 +69,8 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
           style={{ padding: "10px", margin: "10px 0", width: "100%" }}
         />
         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
-          <button onClick={handleSubmitScore} style={{ padding: "10px 20px" }}>
-            スコアを登録（まだ
+          <button onClick={submitScore} style={{ padding: "10px 20px" }}>
+            スコアを登録
           </button>
         </div>
         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>

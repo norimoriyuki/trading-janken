@@ -130,8 +130,8 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           onClick={handleForfeit} 
           style={{ 
             color: "white", 
+            border: "1px solid white",  
             background: "transparent", 
-            border: "none", 
             cursor: "pointer", 
             position: "absolute",
             left: "20px" 
