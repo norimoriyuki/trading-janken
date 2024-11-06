@@ -91,10 +91,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setShowDescription(description);
   };
 
-  const handleSubmitScore = () => {
-    // スコア送信処理（今は何もしない）
-  };
-
   const closeScoreWindow = () => {
     setShowScoreWindow(false);
     onBackClick(); // ホーム画面に戻る
