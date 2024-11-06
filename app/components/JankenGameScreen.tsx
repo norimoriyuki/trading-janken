@@ -28,7 +28,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [playerChoicesState, setPlayerChoicesState] = useState<ChoiceType[]>(playerChoices);
   const [showResult, setShowResult] = useState<{ playerChoice: ChoiceType; computerChoice: ChoiceType; result: string } | null>(null);
   const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); // スコアウィンドウの表示管理
-  const [playerName, setPlayerName] = useState<string>("");
 
   const [life, setLife] = useState<number>(2); 
   const [winCount, setWinCount] = useState<number>(0);
@@ -222,9 +221,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     {showScoreWindow && (
       <ScoreWindow
         winCount={winCount}
-        playerName={playerName}
-        setPlayerName={setPlayerName}
-        handleSubmitScore={handleSubmitScore}
         closeScoreWindow={closeScoreWindow}
       />
     )}
