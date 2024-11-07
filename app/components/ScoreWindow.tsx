@@ -10,9 +10,15 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
   closeScoreWindow,
 }) => {
   const [playerName, setPlayerName] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // スコアをサーバーに送信する関数
   const submitScore = async () => {
+    if (playerName.trim() === "") {
+      setErrorMessage("名前を入力してください");
+      return;
+    }
+
     const payload = { user_name: playerName, score: winCount };
 
     try {
@@ -65,9 +71,15 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
           type="text"
           placeholder="名前を入力してください"
           value={playerName}
-          onChange={(e) => setPlayerName(e.target.value)}
+          onChange={(e) => {
+            setPlayerName(e.target.value);
+            setErrorMessage(""); // テキスト変更時にエラーメッセージをクリア
+          }}
           style={{ padding: "10px", margin: "10px 0", width: "100%" }}
         />
+        {errorMessage && (
+          <p style={{ color: "red", marginTop: "5px" }}>{errorMessage}</p>
+        )}
         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
           <button onClick={submitScore} style={{ padding: "10px 20px" }}>
             スコアを登録
