@@ -31,6 +31,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
   const [life, setLife] = useState<number>(2); 
   const [winCount, setWinCount] = useState<number>(0);
+  const [drawCount, setDrawCount] = useState<number>(0);
 
   const getRandomChoices = (array: ChoiceType[], count: number): ChoiceType[] => {
     const opponentChoice = array[0]; // 相手の手を配列の最初の要素と仮定
@@ -59,10 +60,21 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
     if (result === "win") {
       setWinCount((prev) => prev + 1);
+      setDrawCount(0); 
     } else if (result === "lose") {
       setLife((prev) => prev - 1);
+      setDrawCount(0); 
       if (life - 1 <= 0) {
         setShowScoreWindow(true);
+      }
+    } else if (result === "draw") {
+      setDrawCount((prev) => prev + 1);
+      if (drawCount + 1 >= 3) {
+        // 3回連続のあいこが発生した場合の処理
+        setDrawCount(0);
+        setShowResult({ playerChoice, computerChoice, result: "reset" });
+        setComputerChoices(getRandomChoices(choices, 3)); // 相手の手をリセット
+        return;
       }
     }
 
@@ -212,7 +224,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         </div>
       )}
 
-    <ResultWindow showResult={showResult} closeResult={closeResult} />
+    <ResultWindow showResult={showResult} drawCount = {drawCount} closeResult={closeResult} />
 
     {showScoreWindow && (
       <ScoreWindow

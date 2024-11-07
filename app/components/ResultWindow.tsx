@@ -1,12 +1,7 @@
 import React from "react";
 import JankenCard from "./JankenCard";
 import "./ResultWindow.css";
-
-interface ChoiceType {
-  name: string;
-  img: string;
-  description: string;
-}
+import { ChoiceType } from "./choices";
 
 interface ResultWindowProps {
   showResult: {
@@ -14,15 +9,18 @@ interface ResultWindowProps {
     computerChoice: ChoiceType;
     result: string;
   } | null;
+  drawCount: number;
   closeResult: () => void;
 }
 
-const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, closeResult }) => {
+const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, closeResult }) => {
   if (!showResult) return null;
+
+  const backgroundColor = showResult.result === "win" ? "lightgreen" : showResult.result === "lose" ? "#ccc" : "white";
 
   return (
     <div className="overlay" onClick={closeResult}>
-      <div className="result-window">
+      <div className="result-window" style={{ backgroundColor }}>
         <div className="result-container">
 
           {/* 相手の手 */}
@@ -33,7 +31,7 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, closeResult }) 
         </div>
 
         <p className="result-text">
-          {showResult.result === "win" ? "勝ち" : showResult.result === "lose" ? "負け" : "あいこ"}
+          {showResult.result === "win" ? "WIN" : showResult.result === "lose" ? "LOSE" :`あいこ${drawCount > 0 ? `（${drawCount}回目）` : "3回目"}`}
         </p>
 
         <div className="choice choice-player">
