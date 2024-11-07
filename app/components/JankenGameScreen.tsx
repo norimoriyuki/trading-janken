@@ -2,7 +2,7 @@ import ScoreWindow from "./ScoreWindow";
 import ResultWindow from "./ResultWindow";
 import { useState, useEffect } from "react";
 import JankenCard from "./JankenCard";
-import { choices, ChoiceType, Choice } from "./choices";
+import { choices, ChoiceType } from "./choices";
 
 
 interface JankenGameScreenProps {
@@ -40,12 +40,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     // バリアーの重みを計算
     
     
-    //const zariWeight = Math.min(100, 10 * winCount);
-    
     // グー、チョキ、パーの重みは100に固定
     const otherWeight = 100;
-    const midWeight = Math.min(1000, 30 * winCount);
-    const bigWeight = Math.max(0, 60 * (winCount-10));
+    const midWeight = Math.min(150, 30 * winCount);
+    const bigWeight = Math.min(200,Math.max(0, 60 * (winCount-10)));
 
     const barrierWeight = Math.min(otherWeight, midWeight, bigWeight);
   
