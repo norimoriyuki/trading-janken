@@ -10,13 +10,16 @@ interface JankenGameScreenProps {
   playerChoices: ChoiceType[];
 }
 
-function getResult(player: Choice, computer: Choice): "win" | "lose" | "draw" {
-  if (player === computer || player === "バリアー" || computer === "バリアー") return "draw";
+function getResult(player: ChoiceType, computer: ChoiceType): "win" | "lose" | "draw" {
+  if (player.name === computer.name || player.name === "バリアー" || computer.name === "バリアー") return "draw";
   if (
-    (player === "グー" && computer === "チョキ") ||
-    (player === "チョキ" && computer === "パー") ||
-    (player === "パー" && computer === "グー")
+    (player.type === "rock" && computer.type === "scissors") ||
+    (player.type === "scissors" && computer.type === "paper") ||
+    (player.type === "paper" && computer.type === "rock")
   ) {
+    return "win";
+  }
+  if (player.level > computer.level && player.type === computer.type){
     return "win";
   }
   return "lose";
@@ -27,25 +30,44 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [showDescription, setShowDescription] = useState<string | null>(null);
   const [playerChoicesState, setPlayerChoicesState] = useState<ChoiceType[]>(playerChoices);
   const [showResult, setShowResult] = useState<{ playerChoice: ChoiceType; computerChoice: ChoiceType; result: string } | null>(null);
-  const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); // スコアウィンドウの表示管理
+  const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); 
 
-  const [life, setLife] = useState<number>(2); 
+  const [life, setLife] = useState<number>(5); 
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
 
-  const getRandomChoices = (array: ChoiceType[], count: number): ChoiceType[] => {
-    const opponentChoice = array[0]; // 相手の手を配列の最初の要素と仮定
+  const getRandomChoices = (array: ChoiceType[], count: number, winCount: number): ChoiceType[] => {
+    // バリアーの重みを計算
+    
+    
+    //const zariWeight = Math.min(100, 10 * winCount);
+    
+    // グー、チョキ、パーの重みは100に固定
+    const otherWeight = 100;
+    const midWeight = Math.min(1000, 30 * winCount);
+    const bigWeight = Math.max(0, 60 * (winCount-10));
+
+    const barrierWeight = Math.min(otherWeight, midWeight, bigWeight);
   
-    // 配列を複製し、相手の手を複数回追加
-    const expandedArray = [...array, opponentChoice, opponentChoice, opponentChoice]; // 必要に応じて重複数を調整
+    // 重みに基づいて配列を作成
+    const weightedArray = [
+      ...Array(otherWeight).fill(array.find(choice => choice.name === "グー")),
+      ...Array(otherWeight).fill(array.find(choice => choice.name === "チョキ")),
+      ...Array(otherWeight).fill(array.find(choice => choice.name === "パー")),
+      ...Array(barrierWeight).fill(array.find(choice => choice.name === "バリアー")),
+      ...Array(bigWeight).fill(array.find(choice => choice.name === "村正")),
+      ...Array(midWeight).fill(array.find(choice => choice.name === "ザリガニ")),
+      ...Array(midWeight).fill(array.find(choice => choice.name === "金の玉")),
+      ...Array(midWeight).fill(array.find(choice => choice.name === "札"))
+    ].filter(Boolean) as ChoiceType[]; // `filter(Boolean)` は null の要素を除去
   
     // 配列をシャッフルし、ランダムな要素を選択
-    const shuffled = expandedArray.sort(() => Math.random() - 0.5);
+    const shuffled = weightedArray.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
   };
 
   useEffect(() => {
-    setComputerChoices(getRandomChoices(choices, 3));
+    setComputerChoices(getRandomChoices(choices, 3, winCount));
   }, []);
 
   const handlePlayerChoice = (playerIndex: number) => {
@@ -56,7 +78,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     const computerChoice = computerChoices[randomComputerIndex];
 
     // 勝敗判定
-    const result = getResult(playerChoice.name, computerChoice.name);
+    const result = getResult(playerChoice, computerChoice);
 
     if (result === "win") {
       setWinCount((prev) => prev + 1);
@@ -73,7 +95,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         // 3回連続のあいこが発生した場合の処理
         setDrawCount(0);
         setShowResult({ playerChoice, computerChoice, result: "reset" });
-        setComputerChoices(getRandomChoices(choices, 3)); // 相手の手をリセット
+        setComputerChoices(getRandomChoices(choices, 3, winCount)); // 相手の手をリセット
         return;
       }
     }
@@ -93,7 +115,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setShowResult({ playerChoice, computerChoice, result });
 
     if (result !== "draw") {
-      const newComputerChoices = getRandomChoices(choices, 3);
+      const newComputerChoices = getRandomChoices(choices, 3, winCount);
       setComputerChoices(newComputerChoices);
     }
   };
