@@ -31,7 +31,7 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, clos
         </div>
 
         <p className="result-text">
-          {showResult.result === "win" ? "WIN" : showResult.result === "lose" ? "LOSE" :`あいこ${drawCount > 0 ? `（${drawCount}回目）` : "3回目"}`}
+          {showResult.result === "win" ? "WIN" : showResult.result === "lose" ? "LOSE" :`あいこ${drawCount > 0 ? `（${drawCount}/3）` : "3/3"}`}
         </p>
 
         <div className="choice choice-player">

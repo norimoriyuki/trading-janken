@@ -220,20 +220,8 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           ))}
       </div>
 
-      <div style={{
-        position: "fixed",
-        bottom: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "100%",
-        backgroundColor: "black",
-        color: "white",
-        padding: "10px 0",
-        textAlign: "center",
-        display: "flex",
-        justifyContent: "space-around",
-      }}>
-        <div>勝利回数: {winCount}</div>
+      <div>
+        <span className="star">★</span> × {winCount}
       </div>
 
       {showDescription && (
