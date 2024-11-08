@@ -55,7 +55,7 @@ export default function Home() {
                 marginTop: "20px",
                 padding: "15px 30px",
                 fontSize: "1.2rem",
-                backgroundColor: "#ff9800",
+                backgroundColor: "#555555", // ダークグレー
                 color: "white",
                 border: "none",
                 borderRadius: "10px",
@@ -64,8 +64,8 @@ export default function Home() {
                 fontWeight: "bold",
                 transition: "background-color 0.3s, transform 0.2s",
               }}
-              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#e68900")}
-              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ff9800")}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#3a3a3a")} // ホバー時にさらに濃いグレー
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#555555")}
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.98)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
@@ -79,7 +79,7 @@ export default function Home() {
                 style={{
                   padding: "10px",
                   fontSize: "1rem",
-                  backgroundColor: "#4caf50",
+                  backgroundColor: "#a9a9a9", // ライトグレー
                   color: "white",
                   border: "none",
                   borderRadius: "10px",
@@ -87,8 +87,8 @@ export default function Home() {
                   flex: 1,
                   transition: "background-color 0.3s",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#388e3c")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4caf50")}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#8f8f8f")} // ホバー時に少し濃く
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#a9a9a9")}
               >
                 スコアボード
               </button>
@@ -98,7 +98,7 @@ export default function Home() {
                 style={{
                   padding: "10px",
                   fontSize: "1rem",
-                  backgroundColor: "#4caf50",
+                  backgroundColor: "#a9a9a9", // ライトグレー
                   color: "white",
                   border: "none",
                   borderRadius: "10px",
@@ -106,8 +106,8 @@ export default function Home() {
                   flex: 1,
                   transition: "background-color 0.3s",
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#388e3c")}
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#4caf50")}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#8f8f8f")} // ホバー時に少し濃く
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#a9a9a9")}
               >
                 ルール
               </button>
