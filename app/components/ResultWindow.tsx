@@ -16,7 +16,7 @@ interface ResultWindowProps {
 const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, closeResult }) => {
   if (!showResult) return null;
 
-  const backgroundColor = showResult.result === "win" ? "#E6C200" : showResult.result === "lose" ? "#ccc" : "white";
+  const backgroundColor = "#d3d3d3";
 
   return (
     <div className="overlay" onClick={closeResult}>
@@ -25,7 +25,6 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, clos
 
           {/* 相手の手 */}
           <div className="choice choice-computer">
-            <h3>Enemy</h3>
             <JankenCard choice={showResult.computerChoice} onClick={() => {}} onRightClick={() => {}} />
           </div>
         </div>
@@ -35,7 +34,6 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, clos
         </p>
 
         <div className="choice choice-player">
-            <h3>You</h3>
             <JankenCard choice={showResult.playerChoice} onClick={() => {}} onRightClick={() => {}} />
         </div>
 
