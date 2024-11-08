@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "./JankenCard.css"; // CSSファイルをインポートして、波紋エフェクトを適用
 
 interface JankenCardProps {
   choice: {
@@ -8,15 +9,17 @@ interface JankenCardProps {
   };
   onClick: () => void;
   onRightClick: (event: React.MouseEvent) => void;
+  isPlayerHand?: boolean; // 自分の手札にあるかどうかを示す新しいプロパティ（デフォルト: false）
 }
 
-export default function JankenCard({ choice, onClick, onRightClick }: JankenCardProps) {
+export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand = false }: JankenCardProps) {
   return (
     <div
+      className={isPlayerHand ? "ripple-container" : ""} // 自分の手札のときだけ波紋エフェクトを適用
       onClick={onClick}
       onContextMenu={onRightClick}
       style={{
-        color:"black",
+        color: "black",
         margin: "0 10px",
         padding: "10px",
         border: "1px solid #ddd",
@@ -30,6 +33,8 @@ export default function JankenCard({ choice, onClick, onRightClick }: JankenCard
         alignItems: "center",
         justifyContent: "space-around",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        position: "relative", // 波紋エフェクトに必要なスタイル
+        overflow: "hidden",
       }}
     >
       <Image src={choice.img} alt={choice.name} width={60} height={60} />

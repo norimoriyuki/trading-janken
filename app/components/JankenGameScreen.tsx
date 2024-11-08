@@ -3,7 +3,7 @@ import ResultWindow from "./ResultWindow";
 import { useState, useEffect } from "react";
 import JankenCard from "./JankenCard";
 import { choices, ChoiceType } from "./choices";
-
+import "./JankenGameScreen.css";
 
 interface JankenGameScreenProps {
   onBackClick: () => void;
@@ -35,6 +35,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [life, setLife] = useState<number>(5); 
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
+  const [animateLife, setAnimateLife] = useState<boolean>(false);
+
+  useEffect(() => {
+    // lifeが変わったときにアニメーションを適用
+    setAnimateLife(true);
+    const timer = setTimeout(() => setAnimateLife(false), 400); // アニメーションが終わったらリセット
+
+    return () => clearTimeout(timer);
+  }, [life]);
 
   const getRandomChoices = (array: ChoiceType[], count: number, winCount: number): ChoiceType[] => {
     // バリアーの重みを計算
@@ -195,8 +204,20 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             choice={choice}
             onClick={() => handlePlayerChoice(index)}
             onRightClick={(event) => handleRightClick(event, choice.description)}
+            isPlayerHand={true}
           />
         ))}
+      </div>
+
+      <div>
+          {Array.from({ length: life }).map((_, index) => (
+            <span
+              key={index}
+              className={`heart ${animateLife ? "heart-animate" : ""}`}
+            >
+              ❤
+            </span>
+          ))}
       </div>
 
       <div style={{
@@ -212,7 +233,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         display: "flex",
         justifyContent: "space-around",
       }}>
-        <div>残りライフ: {life}</div>
         <div>勝利回数: {winCount}</div>
       </div>
 

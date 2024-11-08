@@ -11,6 +11,7 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
 }) => {
   const [playerName, setPlayerName] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // 送信中フラグ
 
   // スコアをサーバーに送信する関数
   const submitScore = async () => {
@@ -19,6 +20,7 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
       return;
     }
 
+    setIsSubmitting(true); // 送信中に設定
     const payload = { user_name: playerName, score: winCount };
 
     try {
@@ -38,6 +40,8 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
       }
     } catch (error) {
       console.error("An error occurred while submitting the score", error);
+    } finally {
+      setIsSubmitting(false); // 送信完了後にリセット
     }
   };
 
@@ -76,17 +80,18 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
             setErrorMessage(""); // テキスト変更時にエラーメッセージをクリア
           }}
           style={{ padding: "10px", margin: "10px 0", width: "100%" }}
+          disabled={isSubmitting} // 送信中は入力無効
         />
         {errorMessage && (
           <p style={{ color: "red", marginTop: "5px" }}>{errorMessage}</p>
         )}
         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
-          <button onClick={submitScore} style={{ padding: "10px 20px" }}>
-            スコアを登録
+          <button onClick={submitScore} style={{ padding: "10px 20px" }} disabled={isSubmitting}>
+            {isSubmitting ? "登録中..." : "スコアを登録"}
           </button>
         </div>
         <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
-          <button onClick={closeScoreWindow} style={{ padding: "10px 20px" }}>
+          <button onClick={closeScoreWindow} style={{ padding: "10px 20px" }} disabled={isSubmitting}>
             戻る
           </button>
         </div>

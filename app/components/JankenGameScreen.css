@@ -1,0 +1,40 @@
+.heart {
+    font-size: 2rem;
+    color: red;
+    margin: 0 5px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .big-star, .small-star {
+    font-size: 2rem;
+    margin: 0 5px;
+    display: inline-flex;
+  }
+  
+  .big-star {
+    color: gold;
+  }
+  
+  .small-star {
+    font-size: 1.2rem;
+    color: gold;
+  }
+  
+  .heart-animate, .star-animate {
+    animation: pop 0.4s ease-out;
+  }
+  
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
