@@ -16,7 +16,7 @@ interface ResultWindowProps {
 const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, closeResult }) => {
   if (!showResult) return null;
 
-  const backgroundColor = showResult.result === "win" ? "lightgreen" : showResult.result === "lose" ? "#ccc" : "white";
+  const backgroundColor = showResult.result === "win" ? "#E6C200" : showResult.result === "lose" ? "#ccc" : "white";
 
   return (
     <div className="overlay" onClick={closeResult}>
