@@ -31,6 +31,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [playerChoicesState, setPlayerChoicesState] = useState<ChoiceType[]>(playerChoices);
   const [showResult, setShowResult] = useState<{ playerChoice: ChoiceType; computerChoice: ChoiceType; result: string } | null>(null);
   const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); 
+  const [isShuffling, setIsShuffling] = useState<boolean>(false); // アニメーション状態管理
 
   const [life, setLife] = useState<number>(5); 
   const [winCount, setWinCount] = useState<number>(0);
@@ -124,8 +125,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setShowResult({ playerChoice, computerChoice, result });
 
     if (result !== "draw") {
+      setIsShuffling(true);
       const newComputerChoices = getRandomChoices(choices, 3, winCount);
       setComputerChoices(newComputerChoices);
+      setIsShuffling(false);
     }
   };
 
@@ -140,7 +143,18 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   };
 
   const closeDescription = () => setShowDescription(null);
-  const closeResult = () => setShowResult(null);
+  const closeResult = () => {
+    setShowResult(null);
+
+    if (drawCount === 0) {
+      // あいこ3回目の後のみ引き直しとアニメーションを実行
+      setTimeout(() => {
+        setIsShuffling(true); // アニメーションを開始
+        setComputerChoices(getRandomChoices(choices, 3, winCount));
+        setTimeout(() => setIsShuffling(false), 600); // アニメーションが完了したら停止
+      }, 100); // ResultWindowを閉じて少し後にトリガー
+    }
+  };
 
   const handleForfeit = () => {
     setLife(0);
@@ -182,14 +196,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <div>Trading Janken</div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
+      <div className="computer-card-container" style={{ marginTop: "20px" }}>
         {computerChoices.map((choice, index) => (
-          <JankenCard
-            key={`computer-${index}`}
-            choice={choice}
-            onClick={() => {}}
-            onRightClick={(event) => handleRightClick(event, choice.description)}
-          />
+          <div key={index} className={isShuffling ? "computer-card" : ""}>
+            <JankenCard
+              choice={choice}
+              onClick={() => {}}
+              onRightClick={(event) => handleRightClick(event, choice.description)}
+            />
+          </div>
         ))}
       </div>
 
@@ -197,7 +212,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
       <h1>あなたの手札</h1>
 
-      <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
+      <div className="player-card-container">
         {playerChoicesState.map((choice, index) => (
           <JankenCard
             key={`player-${index}`}
