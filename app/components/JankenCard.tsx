@@ -1,21 +1,41 @@
 import Image from "next/image";
-import "./JankenCard.css"; // CSSファイルをインポートして、波紋エフェクトを適用
+import "./JankenCard.css";
 
 interface JankenCardProps {
   choice: {
     name: string;
     img: string;
     description: string;
+    type: string;
+    level: number;
   };
   onClick: () => void;
   onRightClick: (event: React.MouseEvent) => void;
   isPlayerHand?: boolean; // 自分の手札にあるかどうかを示す新しいプロパティ（デフォルト: false）
 }
 
+// レベルに応じて明度を調整する関数
+const adjustColorBrightness = (color: string, level: number): string => {
+  const brightnessAdjustment = 1 - level * 0.09; // レベルが高いほど色を暗くする
+  const [r, g, b] = color.match(/\d+/g)!.map(Number);
+  return `rgb(${Math.floor(r * brightnessAdjustment)}, ${Math.floor(g * brightnessAdjustment)}, ${Math.floor(b * brightnessAdjustment)})`;
+};
+
 export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand = false }: JankenCardProps) {
+  // タイプに基づいた基本色
+  const baseColor = {
+    rock: "rgb(173, 216, 230)",       // 青系
+    scissors: "rgb(255, 182, 193)",   // 赤系
+    paper: "rgb(144, 238, 144)",      // 緑系
+    other: "rgb(211, 211, 211)"       // グレー系
+  }[choice.type] || "rgb(255, 255, 255)";
+
+  // レベルに応じて色を調整
+  const backgroundColor = adjustColorBrightness(baseColor, choice.level);
+
   return (
     <div
-      className={isPlayerHand ? "ripple-container" : ""} // 自分の手札のときだけ波紋エフェクトを適用
+      className={isPlayerHand ? "ripple-container" : ""}
       onClick={onClick}
       onContextMenu={onRightClick}
       style={{
@@ -24,7 +44,7 @@ export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand
         padding: "10px",
         border: "1px solid #ddd",
         borderRadius: "15px",
-        backgroundColor: "#f9f9f9",
+        backgroundColor: backgroundColor, // 動的に背景色を設定
         cursor: "pointer",
         width: "80px",
         height: "120px",
@@ -33,7 +53,7 @@ export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand
         alignItems: "center",
         justifyContent: "space-around",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-        position: "relative", // 波紋エフェクトに必要なスタイル
+        position: "relative",
         overflow: "hidden",
       }}
     >
