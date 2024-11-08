@@ -63,7 +63,7 @@
 
   .computer-card {
     opacity: 0;
-    animation: spreadCards 0.6s ease-out forwards;
+    animation: spreadCards 0.2s ease-out forwards;
   }
   
   .computer-card:nth-child(1) {

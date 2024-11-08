@@ -25,7 +25,7 @@ export default function Home() {
         height: "100vh",
         width: "100%",
         overflowY: "scroll",
-        backgroundColor: "#ccc",
+        backgroundColor: "gray",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -36,11 +36,11 @@ export default function Home() {
           width: "100%",
           maxWidth: "500px",
           aspectRatio: "9 / 16",
-          backgroundColor: "#2a7fbe",
+          backgroundColor: "#d3d3d3",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
+          color: "black",
           flexDirection: "column",
         }}
       >
