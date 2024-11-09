@@ -11,7 +11,8 @@ interface JankenCardProps {
   };
   onClick: () => void;
   onRightClick: (event: React.MouseEvent) => void;
-  isPlayerHand?: boolean; // 自分の手札にあるかどうかを示す新しいプロパティ（デフォルト: false）
+  isPlayerHand?: boolean;
+  className?: string; // classNameを追加
 }
 
 // レベルに応じて明度を調整する関数
@@ -21,13 +22,19 @@ const adjustColorBrightness = (color: string, level: number): string => {
   return `rgb(${Math.floor(r * brightnessAdjustment)}, ${Math.floor(g * brightnessAdjustment)}, ${Math.floor(b * brightnessAdjustment)})`;
 };
 
-export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand = false }: JankenCardProps) {
+export default function JankenCard({
+  choice,
+  onClick,
+  onRightClick,
+  isPlayerHand = false,
+  className = "", // デフォルト値を設定
+}: JankenCardProps) {
   // タイプに基づいた基本色
   const baseColor = {
-    rock: "rgb(173, 216, 230)",       // 青系
-    scissors: "rgb(255, 182, 193)",   // 赤系
-    paper: "rgb(144, 238, 144)",      // 緑系
-    other: "rgb(211, 211, 211)"       // グレー系
+    rock: "rgb(173, 216, 230)", // 青系
+    scissors: "rgb(255, 182, 193)", // 赤系
+    paper: "rgb(144, 238, 144)", // 緑系
+    other: "rgb(211, 211, 211)", // グレー系
   }[choice.type] || "rgb(255, 255, 255)";
 
   // レベルに応じて色を調整
@@ -35,7 +42,7 @@ export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand
 
   return (
     <div
-      className={isPlayerHand ? "ripple-container" : ""}
+      className={`${isPlayerHand ? "ripple-container" : ""} ${className}`} // 動的なクラス名
       onClick={onClick}
       onContextMenu={onRightClick}
       style={{
@@ -44,7 +51,7 @@ export default function JankenCard({ choice, onClick, onRightClick, isPlayerHand
         padding: "10px",
         border: "1px solid #ddd",
         borderRadius: "15px",
-        backgroundColor: backgroundColor, // 動的に背景色を設定
+        backgroundColor: backgroundColor,
         cursor: "pointer",
         width: "80px",
         height: "120px",

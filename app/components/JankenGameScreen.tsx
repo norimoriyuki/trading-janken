@@ -37,6 +37,9 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
   const [animateLife, setAnimateLife] = useState<boolean>(false);
+  const [slidingInIndex, setSlidingInIndex] = useState<number | null>(null);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+
 
   useEffect(() => {
     // lifeが変わったときにアニメーションを適用
@@ -105,7 +108,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         // 3回連続のあいこが発生した場合の処理
         setDrawCount(0);
         setShowResult({ playerChoice, computerChoice, result: "reset" });
-        setComputerChoices(getRandomChoices(choices, 3, winCount)); // 相手の手をリセット
         return;
       }
     }
@@ -121,13 +123,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setPlayerChoicesState(newPlayerChoices);
     setComputerChoices(newComputerChoices);
 
+    setSelectedCardIndex(playerIndex);
+
     // 勝敗結果をモーダルに表示
     setShowResult({ playerChoice, computerChoice, result });
 
     if (result !== "draw") {
       setIsShuffling(true);
-      const newComputerChoices = getRandomChoices(choices, 3, winCount);
-      setComputerChoices(newComputerChoices);
+      //const newComputerChoices = getRandomChoices(choices, 3, winCount);
+      //setComputerChoices(newComputerChoices);
       setIsShuffling(false);
     }
   };
@@ -143,8 +147,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   };
 
   const closeDescription = () => setShowDescription(null);
+
   const closeResult = () => {
     setShowResult(null);
+    if (selectedCardIndex !== null) {
+      setSlidingInIndex(selectedCardIndex);
+      setTimeout(() => setSlidingInIndex(null), 600); // アニメーションが終わったらリセット
+      setSelectedCardIndex(null); // 元の位置インデックスをリセット
+    }
+    
 
     if (drawCount === 0) {
       // あいこ3回目の後のみ引き直しとアニメーションを実行
@@ -153,6 +164,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         setComputerChoices(getRandomChoices(choices, 3, winCount));
         setTimeout(() => setIsShuffling(false), 600); // アニメーションが完了したら停止
       }, 100); // ResultWindowを閉じて少し後にトリガー
+    }
+
+    if (slidingInIndex !== null) {
+      setTimeout(() => setSlidingInIndex(null), 600);
     }
   };
 
@@ -220,6 +235,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             onClick={() => handlePlayerChoice(index)}
             onRightClick={(event) => handleRightClick(event, choice.description)}
             isPlayerHand={true}
+            className={slidingInIndex === index ? "card-slide-in" : ""}
           />
         ))}
       </div>
