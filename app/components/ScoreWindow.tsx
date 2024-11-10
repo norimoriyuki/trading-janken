@@ -79,7 +79,7 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
             setPlayerName(e.target.value);
             setErrorMessage(""); // テキスト変更時にエラーメッセージをクリア
           }}
-          style={{ padding: "10px", margin: "10px 0", width: "100%" }}
+          style={{ padding: "10px", margin: "10px 0", width: "90%" }}
           disabled={isSubmitting} // 送信中は入力無効
         />
         {errorMessage && (
