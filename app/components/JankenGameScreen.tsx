@@ -58,7 +58,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     const midWeight = Math.min(150, Math.max(30 * (winCount-2),0));
     const bigWeight = Math.min(200,Math.max(0, 60 * (winCount-10)));
 
-    const barrierWeight = Math.min(otherWeight, midWeight, bigWeight);
+    const barrierWeight = Math.max(20,Math.min(otherWeight, midWeight, bigWeight));
   
     // 重みに基づいて配列を作成
     const weightedArray = [
@@ -80,8 +80,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   };
 
   useEffect(() => {
-    setComputerChoices(getRandomChoices(choices, 3, winCount));
-  }, []);
+    if (computerChoices.length === 0) {
+      setComputerChoices(getRandomChoices(choices, 3, winCount));
+    }
+  }, [computerChoices, winCount]);
 
   const handlePlayerChoice = (playerIndex: number) => {
     // ランダムにコンピュータのインデックスを選ぶ
@@ -92,6 +94,19 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
     // 勝敗判定
     const result = getResult(playerChoice, computerChoice);
+
+    // プレイヤーの手とコンピュータの手を交換する
+    const newPlayerChoices = [...playerChoicesState];
+    const newComputerChoices = [...computerChoices];
+    
+    // 交換
+    newPlayerChoices[playerIndex] = computerChoice;
+    newComputerChoices[randomComputerIndex] = playerChoice;
+
+    setPlayerChoicesState(newPlayerChoices);
+    setComputerChoices(newComputerChoices);
+
+    setSelectedCardIndex(playerIndex);
 
     if (result === "win") {
       setWinCount((prev) => prev + 1);
@@ -111,19 +126,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         return;
       }
     }
-
-    // プレイヤーの手とコンピュータの手を交換する
-    const newPlayerChoices = [...playerChoicesState];
-    const newComputerChoices = [...computerChoices];
-    
-    // 交換
-    newPlayerChoices[playerIndex] = computerChoice;
-    newComputerChoices[randomComputerIndex] = playerChoice;
-
-    setPlayerChoicesState(newPlayerChoices);
-    setComputerChoices(newComputerChoices);
-
-    setSelectedCardIndex(playerIndex);
 
     // 勝敗結果をモーダルに表示
     setShowResult({ playerChoice, computerChoice, result });
