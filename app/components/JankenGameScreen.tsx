@@ -58,7 +58,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     const midWeight = Math.min(150, Math.max(30 * (winCount-2),0));
     const bigWeight = Math.min(200,Math.max(0, 60 * (winCount-10)));
 
-    const barrierWeight = Math.max(20,Math.min(otherWeight, midWeight, bigWeight));
+    const barrierWeight = Math.max(15,Math.min(otherWeight, midWeight, bigWeight));
   
     // 重みに基づいて配列を作成
     const weightedArray = [
