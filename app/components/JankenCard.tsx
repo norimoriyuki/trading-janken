@@ -31,18 +31,18 @@ export default function JankenCard({
 }: JankenCardProps) {
   // タイプに基づいた基本色
   const baseColor = {
-    rock: "rgb(173, 216, 230)", // 青系
-    scissors: "rgb(255, 182, 193)", // 赤系
-    paper: "rgb(144, 238, 144)", // 緑系
+    rock: "rgb(144, 238, 144)", // 緑系
+    scissors: "rgb(255, 255, 153)", // 赤系
+    paper: "rgb(173, 216, 230)", // 青系
     other: "rgb(211, 211, 211)", // グレー系
   }[choice.type] || "rgb(255, 255, 255)";
 
   // レベルに応じて色を調整
-  const backgroundColor = adjustColorBrightness(baseColor, choice.level);
+  const borderColor = adjustColorBrightness(baseColor, choice.level);
 
   return (
     <div
-      className={`${isPlayerHand ? "ripple-container" : ""} ${className}`} // 動的なクラス名
+      className={`${isPlayerHand ? "ripple-container" : ""} ${className}`}
       onClick={onClick}
       onContextMenu={onRightClick}
       style={{
@@ -51,7 +51,7 @@ export default function JankenCard({
         padding: "10px",
         border: "1px solid #ddd",
         borderRadius: "15px",
-        backgroundColor: backgroundColor,
+        backgroundColor: "#f9f9f9", // 固定の背景色
         cursor: "pointer",
         width: "80px",
         height: "120px",
@@ -64,7 +64,19 @@ export default function JankenCard({
         overflow: "hidden",
       }}
     >
-      <Image src={choice.img} alt={choice.name} width={60} height={60} />
+      <div
+        style={{
+          width: "60px",
+          height: "60px",
+          //borderRadius: "8px", // 角を少し丸める
+          border: `4px solid ${borderColor}`, // 枠の色をタイプに基づいて設定
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image src={choice.img} alt={choice.name} width={48} height={48} />
+      </div>
       <p style={{ marginTop: "10px", fontWeight: "bold" }}>{choice.name}</p>
     </div>
   );
