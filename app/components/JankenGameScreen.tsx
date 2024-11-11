@@ -241,8 +241,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-      <h6>　</h6>
-
       <div className="player-card-container">
         {playerChoicesState.map((choice, index) => (
           <JankenCard

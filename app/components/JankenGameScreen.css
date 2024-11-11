@@ -1,5 +1,5 @@
 .heart {
-    font-size: 2rem;
+    font-size: 1.4rem;
     color: rgb(211, 0, 0);
     margin: 0 5px;
     display: inline-block;
@@ -8,7 +8,7 @@
   
   
   .star {
-    font-size: 1.5em; /* Adjust size as needed */
+    font-size: 1.4em; /* Adjust size as needed */
     color: yellow;
   }
   
