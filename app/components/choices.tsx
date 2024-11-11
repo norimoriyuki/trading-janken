@@ -17,7 +17,7 @@ export interface ChoiceType {
     { name: "札", img: "/money.png", description: "高位のパー。パーに勝つ",type:"paper",level:1 },
     { name: "隕石", img: "/meteor.png", description: "最高位のグー。他のグー系に勝つ",type:"rock",level:2 },
     { name: "村正", img: "/muramasa.png", description: "最高位のチョキ。他のチョキ系に勝つ",type:"scissors",level:2 },
-    { name: "エロ本", img: "/erohon.png", description: "最高位のパー。他のパー系に勝つ",type:"paper",level:2 },
+    { name: "愛", img: "/love.png", description: "最高位のパー。他のパー系に勝つ",type:"paper",level:2 },
     { name: "バリアー", img: "/barrier.png", description: "どの手ともあいこになる", type:"other", level:0 }
 
   ];
