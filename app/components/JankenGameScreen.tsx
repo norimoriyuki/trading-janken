@@ -213,6 +213,22 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <div>Trading Janken</div>
       </div>
 
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(50px)" }}>
+        
+        <div style={{
+          border: "1px solid black", // 上、右、下にのみボーダーを表示
+          borderRight: "none",
+          padding: "5px 10px",
+          marginLeft: "10px",
+          color: "black",
+          width: "200px",
+          textAlign: "left" 
+        }}>
+          <p style={{fontWeight: "bold" }}>　ランダムロボ</p>
+        </div>
+        <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px" }} />
+      </div>
+
       <div className="computer-card-container" style={{ marginTop: "20px" }}>
         {computerChoices.map((choice, index) => (
           <div key={index} className={isShuffling ? "computer-card" : ""}>
@@ -225,9 +241,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-      <h1>相手の手札</h1>
-
-      <h1>あなたの手札</h1>
+      <h6>　</h6>
 
       <div className="player-card-container">
         {playerChoicesState.map((choice, index) => (
@@ -242,20 +256,42 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-      <div>
-          {Array.from({ length: life }).map((_, index) => (
-            <span
-              key={index}
-              className={`heart ${animateLife ? "heart-animate" : ""}`}
-            >
-              ❤
-            </span>
-          ))}
+
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-40px)" }}>
+        <img src={"/player.png"} alt="Computer" style={{ width: "105px", height: "125px" }} />
+        
+        <div style={{
+          border: "1px solid black", // 上、右、下にのみボーダーを表示
+          borderLeft: "none",
+          padding: "5px 10px",
+          marginLeft: "10px",
+          color: "black",
+          width: "200px",
+          textAlign: "left" 
+        }}>
+        <p style={{fontWeight: "bold" }}>　You</p>
+          <div>
+            {Array.from({ length: life }).map((_, index) => (
+              <span
+                key={index}
+                className={`heart ${animateLife ? "heart-animate" : ""}`}
+              >
+                ❤
+              </span>
+            ))}
+          </div>
+
+          <div>
+            <span className="star">★</span> × {winCount}
+          </div>
+        </div>
+        
       </div>
 
-      <div>
-        <span className="star">★</span> × {winCount}
-      </div>
+      <h5>カードを確認：右クリック（PC）、長押し（スマホ）</h5>
+
+
+      
 
       {showDescription && (
         <div

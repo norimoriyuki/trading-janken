@@ -3,10 +3,14 @@
 import { useState, useEffect } from "react";
 import JankenGameScreen from "./components/JankenGameScreen";
 import ScoreboardScreen from "./components/ScoreboardScreen";
-import RulesScreen from "./components/RulesScreen";
 import { choices, ChoiceType } from "./components/choices";
 
 export default function Home() {
+  const rules = `使ったカードが交換されるカードゲーム
+    5回負けるまでのスコアを競う
+    最強の手札を作りながら連勝を目指せ！
+    `;
+
   const [screen, setScreen] = useState<"start" | "game" | "scoreboard" | "rules">("start");
   const [playerChoices, setPlayerChoices] = useState<ChoiceType[]>([]);
 
@@ -16,7 +20,6 @@ export default function Home() {
 
   const handleStartClick = () => setScreen("game");
   const handleScoreboardClick = () => setScreen("scoreboard");
-  const handleRulesClick = () => setScreen("rules");
   const handleBackClick = () => setScreen("start");
 
   return (
@@ -72,7 +75,6 @@ export default function Home() {
               スタート
             </button>
 
-            {/* スコアボードとルールボタン */}
             <div style={{ display: "flex", width: "100%", gap: "10px", marginTop: "20px" }}>
               <button
                 onClick={handleScoreboardClick}
@@ -92,26 +94,33 @@ export default function Home() {
               >
                 スコアボード
               </button>
-
-              <button
-                onClick={handleRulesClick}
-                style={{
-                  padding: "10px",
-                  fontSize: "1rem",
-                  backgroundColor: "#a9a9a9", // ライトグレー
-                  color: "white",
-                  border: "none",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  flex: 1,
-                  transition: "background-color 0.3s",
-                }}
-                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#8f8f8f")} // ホバー時に少し濃く
-                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#a9a9a9")}
-              >
-                ルール
-              </button>
             </div>
+            <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "20px",
+        height: "100%",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#fff",
+          color: "#333",
+          padding: "20px",
+          borderRadius: "10px",
+          maxWidth: "90%",
+          maxHeight: "80%",
+          overflowY: "auto",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          textAlign: "left",
+          whiteSpace: "pre-line",
+        }}
+      >
+        {rules}
+      </div></div>
           </div>
         )}
 
@@ -126,9 +135,6 @@ export default function Home() {
           <ScoreboardScreen onBackClick={handleBackClick} />
         )}
 
-        {screen === "rules" && (
-          <RulesScreen onBackClick={handleBackClick} />
-        )}
       </div>
     </div>
   );
