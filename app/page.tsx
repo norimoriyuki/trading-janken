@@ -7,7 +7,6 @@ import { choices, ChoiceType } from "./components/choices";
 
 export default function Home() {
   const rules = `使ったカードが交換されるカードゲーム
-    5回負けるまでのスコアを競う
     最強の手札を作りながら連勝を目指せ！
     `;
 
@@ -107,10 +106,9 @@ export default function Home() {
     >
       <div
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#ddd",
           color: "#333",
           padding: "20px",
-          borderRadius: "10px",
           maxWidth: "90%",
           maxHeight: "80%",
           overflowY: "auto",
