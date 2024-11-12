@@ -69,8 +69,8 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
           textAlign: "center",
         }}
       >
-        <h2>スコア登録</h2>
-        <p>勝利回数: {winCount}</p>
+        <h2>Score</h2>
+        <p style={{ fontSize: "2rem", fontWeight: "bold", margin: "20px 0" }}> {winCount}</p>
         <input
           type="text"
           placeholder="名前を入力してください"
@@ -85,15 +85,38 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
         {errorMessage && (
           <p style={{ color: "red", marginTop: "5px" }}>{errorMessage}</p>
         )}
-        <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
-          <button onClick={submitScore} style={{ padding: "10px 20px" }} disabled={isSubmitting}>
-            {isSubmitting ? "登録中..." : "スコアを登録"}
-          </button>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-around", marginTop: "10px" }}>
-          <button onClick={closeScoreWindow} style={{ padding: "10px 20px" }} disabled={isSubmitting}>
-            戻る
-          </button>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", flexDirection: 'column',alignItems:"center" }}>
+            <button
+                onClick={submitScore}
+                style={{
+                padding: "10px",
+                width: "90%",
+                fontSize: "1rem",
+                cursor: "pointer",
+                borderRadius: "5px",
+                backgroundColor: isSubmitting ? "#ccc" : "#4caf50",
+                color: "white",
+                }}
+                disabled={isSubmitting}
+            >
+                {isSubmitting ? "登録中..." : "スコアを登録"}
+            </button>
+            <button
+                onClick={closeScoreWindow}
+                style={{
+                marginTop: "10px",
+                padding: "10px",
+                width: "90%",
+                fontSize: "1rem",
+                cursor: "pointer",
+                borderRadius: "5px",
+                backgroundColor: "#d3d3d3",
+                color: "black",
+                }}
+                disabled={isSubmitting}
+            >
+                登録せずに戻る
+            </button>
         </div>
       </div>
     </div>
