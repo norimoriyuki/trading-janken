@@ -216,16 +216,16 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       <div style={{ display: "flex", alignItems: "center", transform: "translateX(60px)" }}>
         
         <div style={{
-          border: "1px solid black", // 上、右、下にのみボーダーを表示
           borderRight: "none",
           padding: "5px 10px",
           marginRight:"-30px",
           marginLeft: "10px",
           color: "black",
-          width: "170px",
-          textAlign: "left" 
+          width: "200px",
+          textAlign: "left" ,
+          background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255,0.5) 30%)`,
         }}>
-          <p style={{fontWeight: "bold" }}>　ランダムロボ</p>
+          <p style={{fontWeight: "bold", marginBottom:"40px", marginLeft:"10px" }}>ランダムロボ</p>
         </div>
         <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
       </div>
@@ -260,14 +260,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <img src={"/player.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
         
         <div style={{
-          border: "1px solid black", // 上、右、下にのみボーダーを表示
+          //border: "1px solid black", // 上、右、下にのみボーダーを表示
           borderLeft: "none",
           padding: "0px 10px",
-          paddingLeft:"80px",
-          marginLeft: "-50px",
+          paddingLeft:"120px",
+          marginLeft: "-60px",
           color: "black",
-          width: "170px",
+          width: "120px",
           textAlign: "left",
+          background: `linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255,0.5) 30%)`,
         }}>
           <p style={{fontWeight: "bold" }}>You</p>
           <div style={{margin:"-3px"}}>

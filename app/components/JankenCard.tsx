@@ -17,7 +17,7 @@ interface JankenCardProps {
 
 // レベルに応じて明度を調整する関数
 const adjustColorBrightness = (color: string, level: number): string => {
-  const brightnessAdjustment = 1 - level * 0.09; // レベルが高いほど色を暗くする
+  const brightnessAdjustment = 1;//- level * 0.9; // レベルが高いほど色を暗くする
   const [r, g, b] = color.match(/\d+/g)!.map(Number);
   return `rgb(${Math.floor(r * brightnessAdjustment)}, ${Math.floor(g * brightnessAdjustment)}, ${Math.floor(b * brightnessAdjustment)})`;
 };
