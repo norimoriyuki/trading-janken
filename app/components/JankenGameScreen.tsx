@@ -270,7 +270,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           textAlign: "left",
         }}>
           <p style={{fontWeight: "bold" }}>You</p>
-          <div style={{margin:"-5px"}}>
+          <div style={{margin:"-3px"}}>
             {Array.from({ length: life }).map((_, index) => (
               <span
                 key={index}
@@ -281,7 +281,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             ))}
           </div>
 
-          <div style={{margin:"-5px"}}>
+          <div style={{margin:"-3px"}}>
             <span className="star">★</span> × {winCount}
           </div>
         </div>
