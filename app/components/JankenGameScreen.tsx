@@ -213,20 +213,21 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <div>Trading Janken</div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(50px)" }}>
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(60px)" }}>
         
         <div style={{
           border: "1px solid black", // 上、右、下にのみボーダーを表示
           borderRight: "none",
           padding: "5px 10px",
+          marginRight:"-30px",
           marginLeft: "10px",
           color: "black",
-          width: "200px",
+          width: "170px",
           textAlign: "left" 
         }}>
           <p style={{fontWeight: "bold" }}>　ランダムロボ</p>
         </div>
-        <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px" }} />
+        <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
       </div>
 
       <div className="computer-card-container" style={{ marginTop: "20px" }}>
@@ -255,20 +256,21 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       </div>
 
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-40px)" }}>
-        <img src={"/player.png"} alt="Computer" style={{ width: "105px", height: "125px" }} />
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-10px)" }}>
+        <img src={"/player.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
         
         <div style={{
           border: "1px solid black", // 上、右、下にのみボーダーを表示
           borderLeft: "none",
-          padding: "5px 10px",
-          marginLeft: "10px",
+          padding: "0px 10px",
+          paddingLeft:"80px",
+          marginLeft: "-50px",
           color: "black",
-          width: "200px",
-          textAlign: "left" 
+          width: "170px",
+          textAlign: "left",
         }}>
-        <p style={{fontWeight: "bold" }}>　You</p>
-          <div>
+          <p style={{fontWeight: "bold" }}>You</p>
+          <div style={{margin:"-5px"}}>
             {Array.from({ length: life }).map((_, index) => (
               <span
                 key={index}
@@ -279,7 +281,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             ))}
           </div>
 
-          <div>
+          <div style={{margin:"-5px"}}>
             <span className="star">★</span> × {winCount}
           </div>
         </div>
