@@ -31,9 +31,9 @@ export default function JankenCard({
 }: JankenCardProps) {
   // タイプに基づいた基本色
   const baseColor = {
-    rock: "rgb(144, 238, 144)", // 緑系
-    scissors: "rgb(255, 255, 153)", // 赤系
-    paper: "rgb(173, 216, 230)", // 青系
+    rock: "rgb(153, 51, 51)", 
+    scissors: "rgb(204, 153, 51)", // 赤系
+    paper: "rgb(51, 102, 153)", // 青系
     other: "rgb(211, 211, 211)", // グレー系
   }[choice.type] || "rgb(255, 255, 255)";
 
