@@ -49,7 +49,7 @@ export default function JankenCard({
         color: "black",
         margin: "0 10px",
         padding: "10px",
-        border: "1px solid #ddd",
+        border: `4px solid ${borderColor}`,//border: "1px solid #ddd",
         borderRadius: "15px",
         backgroundColor: "#f9f9f9", // 固定の背景色
         cursor: "pointer",
@@ -66,16 +66,16 @@ export default function JankenCard({
     >
       <div
         style={{
-          width: "60px",
-          height: "60px",
+          width: "80px",
+          height: "80px",
           //borderRadius: "8px", // 角を少し丸める
-          border: `4px solid ${borderColor}`, // 枠の色をタイプに基づいて設定
+          //border: `4px solid ${borderColor}`, // 枠の色をタイプに基づいて設定
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Image src={choice.img} alt={choice.name} width={48} height={48} />
+        <Image src={choice.img} alt={choice.name} width={60} height={60} />
       </div>
       <p style={{ marginTop: "10px", fontWeight: "bold" }}>{choice.name}</p>
     </div>
