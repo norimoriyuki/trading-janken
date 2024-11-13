@@ -33,6 +33,19 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, clos
           {showResult.result === "win" ? "WIN" : showResult.result === "lose" ? "LOSE" :`あいこ${drawCount > 0 ? `（${drawCount}/3）` : "3/3"}`}
         </p>
 
+        <div className="result-icon">
+          {showResult.result === "win" && (
+            <span className="star-icon">
+              ★<span className="plus-minus">+1</span>
+            </span>
+          )}
+          {showResult.result === "lose" && (
+            <span className="heart-icon">
+              ❤<span className="plus-minus">-1</span>
+            </span>
+          )}
+        </div>
+
         <div className="choice choice-player">
             <JankenCard choice={showResult.playerChoice} onClick={() => {}} onRightClick={() => {}} />
         </div>

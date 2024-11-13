@@ -37,6 +37,7 @@
   .result-text {
     font-size: 1.5em;
     font-weight: bold;
+    margin:0px;
     animation: fadeInAndScale 0.7s ease forwards;
   }
   
@@ -82,3 +83,63 @@
     animation: slideInFromTop 0.5s ease forwards;
   }
   
+  .result-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    animation: pop 0.3s ease-out;
+  }
+  
+  /* ★ アイコンのスタイル */
+  .star-icon {
+    color: gold;
+    font-weight: bold;
+    font-size: 3rem;
+    animation: starPop 0.5s ease-out;
+  }
+  
+  /* ❤ アイコンのスタイル */
+  .heart-icon {
+    color: red;
+    font-weight: bold;
+    font-size: 3rem;
+    animation: heartBeat 0.5s ease-out;
+  }
+
+  .plus-minus {
+    color: black;
+    font-size: 2rem;
+    
+  }
+  
+  /* アニメーション */
+  @keyframes starPop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes heartBeat {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
