@@ -134,6 +134,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       setDrawCount((prev) => prev + 1);
       if (drawCount + 1 >= 3) {
         // 3回連続のあいこが発生した場合の処理
+        setWinCount((prev) => prev + 1);
         setDrawCount(0);
         setShowResult({ playerChoice, computerChoice, result: "reset" });
         return;

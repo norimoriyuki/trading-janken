@@ -34,7 +34,7 @@ const ResultWindow: React.FC<ResultWindowProps> = ({ showResult, drawCount, clos
         </p>
 
         <div className="result-icon">
-          {showResult.result === "win" && (
+          {((showResult.result === "win") || (showResult.result === "reset")) && (
             <span className="star-icon">
               ★<span className="plus-minus">+1</span>
             </span>
