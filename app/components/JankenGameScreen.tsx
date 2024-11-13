@@ -42,7 +42,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); 
   const [isShuffling, setIsShuffling] = useState<boolean>(false); // アニメーション状態管理
 
-  const [life, setLife] = useState<number>(5); 
+  const [life, setLife] = useState<number>(1); 
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
   const [animateLife, setAnimateLife] = useState<boolean>(false);
@@ -127,9 +127,9 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     } else if (result === "lose") {
       setLife((prev) => prev - 1);
       setDrawCount(0); 
-      if (life - 1 <= 0) {
+      /*if (life - 1 <= 0) {
         setShowScoreWindow(true);
-      }
+      }*/
     } else if (result === "draw") {
       setDrawCount((prev) => prev + 1);
       if (drawCount + 1 >= 3) {
@@ -184,14 +184,9 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       }, 100);
     }
 
-    /*if (drawCount === 0) {
-      getRandomEnemyImage();
-      setIsEnemyImageAnimating(true);
-      setTimeout(() => {
-        setIsEnemyImageAnimating(false);
-        setComputerChoices(getRandomChoices(choices, 3, winCount));
-      }, 600);
-    }*/
+    if (life <= 0) {
+      setTimeout(() => setShowScoreWindow(true), 100); // ResultWindowが閉じた後にScoreWindowを表示
+    }
 
     if (slidingInIndex !== null) {
       setTimeout(() => setSlidingInIndex(null), 600);
