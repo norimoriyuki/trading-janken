@@ -10,15 +10,6 @@ interface ScoreboardScreenProps {
   onBackClick: () => void;
 }
 
-const enemyImages = [
-  "/robot1_blue.png",
-  "/robot2_green.png",
-  "/robot3.png",
-  "/robot4_orange.png",
-  "/robot5_red.png",
-  "/robot6_purple.png"
-];
-
 const ScoreboardScreen: React.FC<ScoreboardScreenProps> = ({ onBackClick }) => {
   const [scores, setScores] = useState<ScoreboardEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
