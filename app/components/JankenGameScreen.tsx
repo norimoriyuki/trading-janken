@@ -25,6 +25,15 @@ function getResult(player: ChoiceType, computer: ChoiceType): "win" | "lose" | "
   return "lose";
 }
 
+const enemyImages = [
+  "/robot1_blue.png",
+  "/robot2_green.png",
+  "/robot3.png",
+  "/robot4_orange.png",
+  "/robot5_red.png",
+  "/robot6_purple.png"
+];
+
 export default function JankenGameScreen({ onBackClick, playerChoices }: JankenGameScreenProps) {
   const [computerChoices, setComputerChoices] = useState<ChoiceType[]>([]);
   const [showDescription, setShowDescription] = useState<string | null>(null);
@@ -39,7 +48,8 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [animateLife, setAnimateLife] = useState<boolean>(false);
   const [slidingInIndex, setSlidingInIndex] = useState<number | null>(null);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
-
+  const [enemyImage, setEnemyImage] = useState<string>(enemyImages[0]);
+  const [isEnemyImageAnimating, setIsEnemyImageAnimating] = useState(false);
 
   useEffect(() => {
     // lifeが変わったときにアニメーションを適用
@@ -50,8 +60,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   }, [life]);
 
   const getRandomChoices = (array: ChoiceType[], count: number, winCount: number): ChoiceType[] => {
-    // バリアーの重みを計算
-    
     
     // グー、チョキ、パーの重みは100に固定
     const otherWeight = 100;
@@ -77,6 +85,11 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     // 配列をシャッフルし、ランダムな要素を選択
     const shuffled = weightedArray.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
+  };
+
+  const getRandomEnemyImage = () => {
+    const randomImage = enemyImages[Math.floor(Math.random() * enemyImages.length)];
+    setEnemyImage(randomImage);
   };
 
   useEffect(() => {
@@ -160,13 +173,25 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     
 
     if (drawCount === 0) {
-      // あいこ3回目の後のみ引き直しとアニメーションを実行
+      getRandomEnemyImage();
+      setIsEnemyImageAnimating(true);
+      setIsShuffling(true); // 手札アニメーションも同時に開始
+  
       setTimeout(() => {
-        setIsShuffling(true); // アニメーションを開始
-        setComputerChoices(getRandomChoices(choices, 3, winCount));
-        setTimeout(() => setIsShuffling(false), 600); // アニメーションが完了したら停止
-      }, 100); // ResultWindowを閉じて少し後にトリガー
+          setComputerChoices(getRandomChoices(choices, 3, winCount));
+          setTimeout(() => setIsShuffling(false), 600); // アニメーションが完了したら停止
+          setTimeout(() => setIsEnemyImageAnimating(false), 600);
+      }, 100);
     }
+
+    /*if (drawCount === 0) {
+      getRandomEnemyImage();
+      setIsEnemyImageAnimating(true);
+      setTimeout(() => {
+        setIsEnemyImageAnimating(false);
+        setComputerChoices(getRandomChoices(choices, 3, winCount));
+      }, 600);
+    }*/
 
     if (slidingInIndex !== null) {
       setTimeout(() => setSlidingInIndex(null), 600);
@@ -213,21 +238,25 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <div>Trading Janken</div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(60px)" }}>
-        
-        <div style={{
-          borderRight: "none",
-          padding: "5px 10px",
-          marginRight:"-30px",
-          marginLeft: "10px",
-          color: "black",
-          width: "200px",
-          textAlign: "left" ,
-          background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255,0.5) 30%)`,
-        }}>
-          <p style={{fontWeight: "bold", marginBottom:"40px", marginLeft:"10px" }}>ランダムロボ</p>
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(60px)" }}>   
+        <div
+          className={`${isEnemyImageAnimating ? "fade-in-blur" : ""}`}
+          style={{
+            borderRight: "none",
+            padding: "5px 10px",
+            marginRight: "-30px",
+            marginLeft: "10px",
+            color: "black",
+            width: "200px",
+            textAlign: "left",
+            background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 30%)`,
+          }}
+        >
+          <p style={{ fontWeight: "bold", marginBottom: "40px", marginLeft: "10px" }}>ランダムロボ</p>
         </div>
-        <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
+        <div className={`enemy-image-container ${isEnemyImageAnimating ? "slide-in" : ""}`}>
+          <img src={enemyImage} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
+        </div>
       </div>
 
       <div className="computer-card-container" style={{ marginTop: "20px", marginBottom:"40px" }}>

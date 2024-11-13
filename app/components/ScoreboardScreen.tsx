@@ -10,6 +10,15 @@ interface ScoreboardScreenProps {
   onBackClick: () => void;
 }
 
+const enemyImages = [
+  "/robot1_blue.png",
+  "/robot2_green.png",
+  "/robot3.png",
+  "/robot4_orange.png",
+  "/robot5_red.png",
+  "/robot6_purple.png"
+];
+
 const ScoreboardScreen: React.FC<ScoreboardScreenProps> = ({ onBackClick }) => {
   const [scores, setScores] = useState<ScoreboardEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -81,12 +90,7 @@ const ScoreboardScreen: React.FC<ScoreboardScreenProps> = ({ onBackClick }) => {
                   <td style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>{index + 1}</td>
                   <td style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>{entry.user_name}</td>
                   <td style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>{entry.score}</td>
-                  <td style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>{new Date(entry.date).toLocaleDateString("ja-JP", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      timeZone: "Asia/Tokyo",
-                    })}</td>
+                  <td style={{ padding: "8px", borderBottom: "1px solid #ddd" }}>{new Date(entry.date).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
