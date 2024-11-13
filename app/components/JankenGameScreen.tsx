@@ -25,15 +25,6 @@ function getResult(player: ChoiceType, computer: ChoiceType): "win" | "lose" | "
   return "lose";
 }
 
-const enemyImages = [
-  "/robot1_blue.png",
-  "/robot2_green.png",
-  "/robot3.png",
-  "/robot4_orange.png",
-  "/robot5_red.png",
-  "/robot6_purple.png"
-];
-
 export default function JankenGameScreen({ onBackClick, playerChoices }: JankenGameScreenProps) {
   const [computerChoices, setComputerChoices] = useState<ChoiceType[]>([]);
   const [showDescription, setShowDescription] = useState<string | null>(null);
@@ -50,6 +41,15 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [enemyImage, setEnemyImage] = useState<string>(enemyImages[0]);
   const [isEnemyImageAnimating, setIsEnemyImageAnimating] = useState(false);
+
+  const enemyImages = [
+    "/robot1_blue.png",
+    "/robot2_green.png",
+    "/robot3.png",
+    "/robot4_orange.png",
+    "/robot5_red.png",
+    "/robot6_purple.png"
+  ];
 
   useEffect(() => {
     // lifeが変わったときにアニメーションを適用
