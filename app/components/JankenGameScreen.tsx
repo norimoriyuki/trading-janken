@@ -230,7 +230,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <img src={"/robot1_blue.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
       </div>
 
-      <div className="computer-card-container" style={{ marginTop: "20px" }}>
+      <div className="computer-card-container" style={{ marginTop: "20px", marginBottom:"40px" }}>
         {computerChoices.map((choice, index) => (
           <div key={index} className={isShuffling ? "computer-card" : ""}>
             <JankenCard
