@@ -42,7 +42,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); 
   const [isShuffling, setIsShuffling] = useState<boolean>(false); // アニメーション状態管理
 
-  const [life, setLife] = useState<number>(1); 
+  const [life, setLife] = useState<number>(5); 
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
   const [animateLife, setAnimateLife] = useState<boolean>(false);
