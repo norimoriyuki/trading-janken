@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import JankenGameScreen from "./components/JankenGameScreen";
 import ScoreboardScreen from "./components/ScoreboardScreen";
 import { choices, ChoiceType } from "./components/choices";
+import Script from 'next/script';
 
 export default function Home() {
   const rules = `使ったカードが交換されるカードゲーム
