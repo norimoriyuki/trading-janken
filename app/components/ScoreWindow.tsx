@@ -94,8 +94,9 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
                 fontSize: "1rem",
                 cursor: "pointer",
                 borderRadius: "5px",
-                backgroundColor: isSubmitting ? "#ccc" : "#4caf50",
+                backgroundColor: isSubmitting ? "#ccc" : "#555555",
                 color: "white",
+                border: "none"
                 }}
                 disabled={isSubmitting}
             >
@@ -110,8 +111,9 @@ const ScoreWindow: React.FC<ScoreWindowProps> = ({
                 fontSize: "1rem",
                 cursor: "pointer",
                 borderRadius: "5px",
-                backgroundColor: "#d3d3d3",
-                color: "black",
+                backgroundColor: "#a9a9a9",
+                color: "white",
+                border: "none"
                 }}
                 disabled={isSubmitting}
             >
