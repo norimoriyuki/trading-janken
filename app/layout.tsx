@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
   title: 'Trading Janken',
@@ -13,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <Head>
+      <Analytics/>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-P01LS0XE5T"></script>
         <script
           dangerouslySetInnerHTML={{
