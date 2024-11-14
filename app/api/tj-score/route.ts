@@ -6,7 +6,7 @@ export async function GET() {
     try {
         // 投稿データを新着順に取得
         const { rows } = await client.sql`
-            SELECT t, user_name, score FROM tj_score ORDER BY score DESC, t  LIMIT 20;
+            SELECT t, user_name, score FROM tj_score ORDER BY score DESC, t  LIMIT 100;
         `;
     
         const formattedRows = rows.map(row => ({
