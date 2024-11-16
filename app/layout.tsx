@@ -1,10 +1,5 @@
-import Head from 'next/head';
-import { Analytics } from "@vercel/analytics/react"
-
-export const metadata = {
-  title: 'Trading Janken',
-  description: '超簡単なTCG風ゲーム',
-}
+import Script from 'next/script';
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -13,10 +8,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <Head>
-      <Analytics/>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-P01LS0XE5T"></script>
-        <script
+      <head>
+        <title>Trading Janken</title>
+        <meta name="description" content="超簡単なTCG風ゲーム" />
+      </head>
+      <body>
+        <Analytics />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-P01LS0XE5T"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -26,8 +30,8 @@ export default function RootLayout({
             `,
           }}
         />
-      </Head>
-      <body>{children}</body>
+        {children}
+      </body>
     </html>
-  )
+  );
 }
