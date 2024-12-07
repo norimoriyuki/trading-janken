@@ -43,18 +43,17 @@
   
   .computer-card-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
     max-width: 30rem;
-    margin-top: 1rem;
+    margin: 2rem;
   }
   
   .player-card-container {
     display: flex;
     justify-content: center;
     max-width: 30rem;
-    margin-top: 1rem;
-    margin: 1rem 0;
+    margin: 2rem;
   }
   
 

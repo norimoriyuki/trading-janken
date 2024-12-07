@@ -259,9 +259,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
       <div className="computer-card-container"
         style={{
-          // 1.25rem≈20px→4%, 2.5rem≈40px→8%
-          marginTop: "4%",
-          marginBottom:"8%"
+          width: "100%"
         }}
       >
         {computerChoices.map((choice, index) => (
