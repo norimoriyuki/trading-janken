@@ -222,7 +222,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       <div style={{
         display: "flex",
         alignItems: "center",
-        // 3.75rem ≈ 60px相当を約12%とする
         transform: "translateX(20%)"
       }}>
         <div
@@ -230,9 +229,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           style={{
             borderRight: "none",
             padding: "1% 2%",
-            // -30px→約-6%
             marginRight: "-6%",
-            // 10px→約2%
             marginLeft: "2%",
             color: "black",
             width: "20vh",
@@ -280,7 +277,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             choice={choice}
             onClick={() => handlePlayerChoice(index)}
             onRightClick={(event) => handleRightClick(event, choice.description)}
-            isPlayerHand={true}
+            //isPlayerHand={true}
             className={slidingInIndex === index ? "card-slide-in" : ""}
           />
         ))}
