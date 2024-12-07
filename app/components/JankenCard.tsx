@@ -64,18 +64,22 @@ export default function JankenCard({
         overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          width: "5rem",
-          height: "5rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Image src={choice.img} alt={choice.name} width={60} height={60} />
-      </div>
-      <p style={{ marginTop: "0.8rem", fontWeight: "bold" }}>{choice.name}</p>
+    <div style={{
+      position: "relative",
+      width: "5rem",
+      height: "5rem",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}>
+      <Image 
+        src={choice.img} 
+        alt={choice.name} 
+        fill
+        style={{ objectFit: "contain" }} 
+      />
+    </div>
+    <p style={{ marginTop: "0.8rem", fontWeight: "bold" }}>{choice.name}</p>
     </div>
   );
 }

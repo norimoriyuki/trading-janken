@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import JankenCard from "./JankenCard";
 import { choices, ChoiceType } from "./choices";
 import "./JankenGameScreen.css";
+import Image from "next/image";
 
 interface JankenGameScreenProps {
   onBackClick: () => void;
@@ -53,7 +54,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
   useEffect(() => {
     setAnimateLife(true);
-    const timer = setTimeout(() => setAnimateLife(false), 400 / 1000 * 1000); // 同じ時間、単位は相対的には不要
+    const timer = setTimeout(() => setAnimateLife(false), 400);
     return () => clearTimeout(timer);
   }, [life]);
 
@@ -150,7 +151,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setShowResult(null);
     if (selectedCardIndex !== null) {
       setSlidingInIndex(selectedCardIndex);
-      setTimeout(() => setSlidingInIndex(null), 600 / 1000 * 1000);
+      setTimeout(() => setSlidingInIndex(null), 600);
       setSelectedCardIndex(null);
     }
 
@@ -160,17 +161,17 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       setIsShuffling(true);
       setTimeout(() => {
         setComputerChoices(getRandomChoices(choices, 3, winCount));
-        setTimeout(() => setIsShuffling(false), 600 / 1000 * 1000);
-        setTimeout(() => setIsEnemyImageAnimating(false), 600 / 1000 * 1000);
-      }, 100 / 1000 * 1000);
+        setTimeout(() => setIsShuffling(false), 600);
+        setTimeout(() => setIsEnemyImageAnimating(false), 600);
+      }, 100);
     }
 
     if (life <= 0) {
-      setTimeout(() => setShowScoreWindow(true), 100 / 1000 * 1000);
+      setTimeout(() => setShowScoreWindow(true), 100);
     }
 
     if (slidingInIndex !== null) {
-      setTimeout(() => setSlidingInIndex(null), 600 / 1000 * 1000);
+      setTimeout(() => setSlidingInIndex(null), 600);
     }
   };
 
@@ -180,16 +181,23 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-
+    // 親要素：ここを基準として%指定を行う
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+      position: "relative"
+    }}>
       <div style={{
-        position: "fixed",
+        //position: "fixed",
         top: 0,
         left: 0,
         width: "100%",
         backgroundColor: "black",
         color: "white",
-        padding: "0.625rem 0", // 10px 0px
+        padding: "1% 0",
         textAlign: "center",
         display: "flex",
         alignItems: "center",
@@ -199,11 +207,11 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           onClick={handleForfeit}
           style={{
             color: "white",
-            border: "0.0625rem solid white", // 1px
+            border: "0.2% solid white",
             background: "transparent",
             cursor: "pointer",
             position: "absolute",
-            left: "1.25rem" // 20px
+            left: "4%" //20px相当を約4%とする（画面幅に応じて調整）
           }}
         >
           降参
@@ -211,29 +219,51 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         <div>Trading Janken</div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(3.75rem)" }}> {/* 60px → 3.75rem */}
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        // 3.75rem ≈ 60px相当を約12%とする
+        transform: "translateX(20%)"
+      }}>
         <div
           className={`${isEnemyImageAnimating ? "fade-in-blur" : ""}`}
           style={{
             borderRight: "none",
-            padding: "0.3125rem 0.625rem", //5px 10px
-            marginRight: "-1.875rem", // -30px
-            marginLeft: "0.625rem", //10px
+            padding: "1% 2%",
+            // -30px→約-6%
+            marginRight: "-6%",
+            // 10px→約2%
+            marginLeft: "2%",
             color: "black",
-            width: "12.5rem", //200px
+            width: "20vh",
             textAlign: "left",
             background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 30%)`,
           }}
         >
-          <p style={{ fontWeight: "bold", marginBottom: "2.5rem", marginLeft: "0.625rem" /*10px*/ }}>ランダムロボ</p>
+          {/* 2.5rem(約40px)→約8% margin-bottom, 10px→2% margin-left */}
+          <p style={{ fontWeight: "bold", marginBottom: "8%", marginLeft: "2%" }}>ランダムロボ</p>
         </div>
-        <div className={`enemy-image-container ${isEnemyImageAnimating ? "slide-in" : ""}`}>
-          <img src={enemyImage} alt="Computer" style={{ width: "6.5625rem", height: "7.8125rem", zIndex: 1 }} /> 
+        <div style={{ 
+          position: "relative", 
+          width: "15vh", 
+          height: "15vh"
+        }}>
+          <Image 
+            src={enemyImage} 
+            alt="Computer" 
+            fill 
+            style={{ objectFit: "contain", zIndex: 1 }} 
+          />
         </div>
       </div>
 
-      <div className="computer-card-container" style={{ marginTop: "1.25rem", marginBottom:"2.5rem" }}>
-        {/* 20px→1.25rem, 40px→2.5rem */}
+      <div className="computer-card-container"
+        style={{
+          // 1.25rem≈20px→4%, 2.5rem≈40px→8%
+          marginTop: "4%",
+          marginBottom:"8%"
+        }}
+      >
         {computerChoices.map((choice, index) => (
           <div key={index} className={isShuffling ? "computer-card" : ""}>
             <JankenCard
@@ -245,7 +275,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-      <div className="player-card-container">
+      <div className="player-card-container" style={{ width: "100%" }}>
         {playerChoicesState.map((choice, index) => (
           <JankenCard
             key={`player-${index}`}
@@ -258,20 +288,30 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-0.625rem)" }}> {/* -10px→-0.625rem */}
-        <img src={"/player.png"} alt="Computer" style={{ width: "6.5625rem", height: "7.8125rem", zIndex: 1 }} />
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        // -10px→約-2%
+        transform: "translateX(-5rem)"
+      }}>
+        <div style={{ 
+          position: "relative", 
+          width: "20vh", 
+          height: "15vh" // ここで明確な高さを指定する
+        }}>
+          <Image src={"/player.png"} alt="player" fill style={{objectFit: "contain", zIndex: 1 }} />
+        </div>
         <div style={{
           borderLeft: "none",
-          padding: "0rem 0.625rem",
-          paddingLeft:"7.5rem", //120px→7.5rem
-          marginLeft: "-3.75rem", //-60px→-3.75rem
+          paddingLeft: "3rem",
+          marginLeft: "-2rem",
           color: "black",
-          width: "7.5rem", //120px→7.5rem
+          width: "10rem",
           textAlign: "left",
           background: `linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255,0.5) 30%)`,
         }}>
           <p style={{ fontWeight: "bold" }}>You</p>
-          <div style={{margin:"-0.1875rem"}}>{/* -3px → -0.1875rem */}
+          <div style={{margin:"-1%"}}>
             {Array.from({ length: life }).map((_, index) => (
               <span
                 key={index}
@@ -282,7 +322,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             ))}
           </div>
 
-          <div style={{margin:"-0.1875rem"}}>
+          <div style={{margin:"-1%"}}>
             <span className="star">★</span> × {winCount}
           </div>
         </div>
@@ -309,8 +349,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           <div
             style={{
               backgroundColor: "#fff",
-              padding: "1.25rem", //20px
-              borderRadius: "0.625rem", //10px
+              //20px→約4%
+              padding: "4%",
+              //10px→約2%
+              borderRadius: "2%",
               maxWidth: "80%",
               textAlign: "center",
             }}
@@ -328,7 +370,6 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           closeScoreWindow={closeScoreWindow}
         />
       )}
-
     </div>
   );
 }
