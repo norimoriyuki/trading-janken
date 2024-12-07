@@ -261,6 +261,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
               choice={choice}
               onClick={() => {}}
               onRightClick={(event) => handleRightClick(event, choice.description)}
+              className=""
             />
           </div>
         ))}
