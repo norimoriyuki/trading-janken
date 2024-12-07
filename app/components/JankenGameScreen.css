@@ -44,7 +44,6 @@
   .computer-card-container {
     display: flex;
     justify-content: center;
-    position: relative;
     max-width: 30rem;
     margin: 2rem;
   }

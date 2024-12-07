@@ -254,11 +254,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         </div>
       </div>
 
-      <div className="computer-card-container"
-        style={{
-          width: "100%"
-        }}
-      >
+      <div className="computer-card-container" style={{width: "100%"}}>
         {computerChoices.map((choice, index) => (
           <div key={index} className={isShuffling ? "computer-card" : ""}>
             <JankenCard
