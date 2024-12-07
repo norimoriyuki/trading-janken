@@ -45,17 +45,16 @@
     display: flex;
     justify-content: flex-start;
     position: relative;
-    width: 100%;
     max-width: 30rem;
     margin-top: 1rem;
-    transform: translateX(0rem);
   }
   
   .player-card-container {
     display: flex;
     justify-content: center;
+    max-width: 30rem;
+    margin-top: 1rem;
     margin: 1rem 0;
-    transform: translateX(2rem);
   }
   
 
