@@ -47,14 +47,14 @@ export default function JankenCard({
       onContextMenu={onRightClick}
       style={{
         color: "black",
-        margin: "0 1rem",
+        margin: "0 0.5rem",
         padding: "1rem",
         border: `0.2rem solid ${borderColor}`,//border: "1px solid #ddd",
         borderRadius: "1rem",
         backgroundColor: "#f9f9f9", // 固定の背景色
         cursor: "pointer",
-        width: "5rem",
-        height: "8rem",
+        width: "4rem",
+        height: "7rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
