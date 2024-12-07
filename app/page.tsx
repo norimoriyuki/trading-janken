@@ -15,14 +15,13 @@ export default function Home() {
   const [isWide, setIsWide] = useState<boolean>(false);
 
   useEffect(() => {
-    // 初期読み込み時およびリサイズ時にアスペクト比を判定
     const checkAspectRatio = () => {
       const ratio = window.innerWidth / window.innerHeight;
       setIsWide(ratio > (9 / 16));
     };
 
     window.addEventListener("resize", checkAspectRatio);
-    checkAspectRatio(); // 初回判定
+    checkAspectRatio(); 
     return () => {
       window.removeEventListener("resize", checkAspectRatio);
     };
@@ -36,12 +35,9 @@ export default function Home() {
   const handleScoreboardClick = () => setScreen("scoreboard");
   const handleBackClick = () => setScreen("start");
 
-  // 横長の場合：外側のdiv（灰色背景の余白付き）を表示
-  // 縦長の場合：内部コンテンツを画面全体で表示（aspectRatioを無視）
   return (
     <>
       {isWide ? (
-        // 横長のときのみ外側のdivを表示
         <div
           style={{
             height: "100vh",
@@ -56,7 +52,7 @@ export default function Home() {
           <div
             style={{
               width: "100%",
-              maxWidth: "500px",
+              maxWidth: "31.25rem", 
               aspectRatio: "9 / 16",
               backgroundColor: "#d3d3d3",
               display: "flex",
@@ -72,13 +68,13 @@ export default function Home() {
                 <button
                   onClick={handleStartClick}
                   style={{
-                    marginTop: "20px",
-                    padding: "15px 30px",
+                    marginTop: "1.25rem",
+                    padding: "1rem 2rem",
                     fontSize: "1.2rem",
-                    backgroundColor: "#555555", // ダークグレー
+                    backgroundColor: "#555555",
                     color: "white",
                     border: "none",
-                    borderRadius: "10px",
+                    borderRadius: "0.625rem",
                     cursor: "pointer",
                     width: "100%",
                     fontWeight: "bold",
@@ -91,16 +87,16 @@ export default function Home() {
                 >
                   スタート
                 </button>
-                <div style={{ display: "flex", width: "100%", gap: "10px", marginTop: "20px" }}>
+                <div style={{ display: "flex", width: "100%", gap: "0.625rem", marginTop: "1.25rem" }}>
                   <button
                     onClick={handleScoreboardClick}
                     style={{
-                      padding: "10px",
+                      padding: "0.625rem",
                       fontSize: "1rem",
                       backgroundColor: "#a9a9a9",
                       color: "white",
                       border: "none",
-                      borderRadius: "10px",
+                      borderRadius: "0.625rem",
                       cursor: "pointer",
                       flex: 1,
                       transition: "background-color 0.3s",
@@ -117,7 +113,7 @@ export default function Home() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "20px",
+                    padding: "1.25rem",
                     height: "100%",
                   }}
                 >
@@ -125,11 +121,11 @@ export default function Home() {
                     style={{
                       backgroundColor: "#ddd",
                       color: "#333",
-                      padding: "20px",
+                      padding: "1.25rem",
                       maxWidth: "90%",
                       maxHeight: "80%",
                       overflowY: "auto",
-                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                      boxShadow: "0 0.25rem 0.5rem rgba(0, 0, 0, 0.2)",
                       textAlign: "left",
                       whiteSpace: "pre-line",
                     }}
@@ -153,7 +149,6 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        // 縦長の場合は、外側のdivは表示せず、中身を全画面で表示
         <div
           style={{
             width: "100%",
@@ -173,13 +168,13 @@ export default function Home() {
               <button
                 onClick={handleStartClick}
                 style={{
-                  marginTop: "20px",
-                  padding: "15px 30px",
+                  marginTop: "1.25rem",
+                  padding: "1rem 2rem",
                   fontSize: "1.2rem",
-                  backgroundColor: "#555555", // ダークグレー
+                  backgroundColor: "#555555",
                   color: "white",
                   border: "none",
-                  borderRadius: "10px",
+                  borderRadius: "0.625rem",
                   cursor: "pointer",
                   width: "100%",
                   fontWeight: "bold",
@@ -192,16 +187,16 @@ export default function Home() {
               >
                 スタート
               </button>
-              <div style={{ display: "flex", width: "100%", gap: "10px", marginTop: "20px" }}>
+              <div style={{ display: "flex", width: "100%", gap: "0.625rem", marginTop: "1.25rem" }}>
                 <button
                   onClick={handleScoreboardClick}
                   style={{
-                    padding: "10px",
+                    padding: "0.625rem",
                     fontSize: "1rem",
                     backgroundColor: "#a9a9a9",
                     color: "white",
                     border: "none",
-                    borderRadius: "10px",
+                    borderRadius: "0.625rem",
                     cursor: "pointer",
                     flex: 1,
                     transition: "background-color 0.3s",
@@ -218,7 +213,7 @@ export default function Home() {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  padding: "20px",
+                  padding: "1.25rem",
                   height: "100%",
                 }}
               >
@@ -226,11 +221,11 @@ export default function Home() {
                   style={{
                     backgroundColor: "#ddd",
                     color: "#333",
-                    padding: "20px",
+                    padding: "1.25rem",
                     maxWidth: "90%",
                     maxHeight: "80%",
                     overflowY: "auto",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                    boxShadow: "0 0.25rem 0.5rem rgba(0, 0, 0, 0.2)",
                     textAlign: "left",
                     whiteSpace: "pre-line",
                   }}

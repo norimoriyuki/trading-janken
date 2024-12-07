@@ -19,7 +19,7 @@ function getResult(player: ChoiceType, computer: ChoiceType): "win" | "lose" | "
   ) {
     return "win";
   }
-  if (player.level > computer.level && player.type === computer.type){
+  if (player.level > computer.level && player.type === computer.type) {
     return "win";
   }
   return "lose";
@@ -39,10 +39,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [showDescription, setShowDescription] = useState<string | null>(null);
   const [playerChoicesState, setPlayerChoicesState] = useState<ChoiceType[]>(playerChoices);
   const [showResult, setShowResult] = useState<{ playerChoice: ChoiceType; computerChoice: ChoiceType; result: string } | null>(null);
-  const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false); 
-  const [isShuffling, setIsShuffling] = useState<boolean>(false); // アニメーション状態管理
+  const [showScoreWindow, setShowScoreWindow] = useState<boolean>(false);
+  const [isShuffling, setIsShuffling] = useState<boolean>(false);
 
-  const [life, setLife] = useState<number>(5); 
+  const [life, setLife] = useState<number>(5);
   const [winCount, setWinCount] = useState<number>(0);
   const [drawCount, setDrawCount] = useState<number>(0);
   const [animateLife, setAnimateLife] = useState<boolean>(false);
@@ -52,23 +52,17 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   const [isEnemyImageAnimating, setIsEnemyImageAnimating] = useState(false);
 
   useEffect(() => {
-    // lifeが変わったときにアニメーションを適用
     setAnimateLife(true);
-    const timer = setTimeout(() => setAnimateLife(false), 400); // アニメーションが終わったらリセット
-
+    const timer = setTimeout(() => setAnimateLife(false), 400 / 1000 * 1000); // 同じ時間、単位は相対的には不要
     return () => clearTimeout(timer);
   }, [life]);
 
   const getRandomChoices = (array: ChoiceType[], count: number, winCount: number): ChoiceType[] => {
-    
-    // グー、チョキ、パーの重みは100に固定
     const otherWeight = 100;
-    const midWeight = Math.min(150, Math.max(30 * (winCount-2),0));
-    const bigWeight = Math.min(200,Math.max(0, 60 * (winCount-10)));
+    const midWeight = Math.min(150, Math.max(30 * (winCount - 2), 0));
+    const bigWeight = Math.min(200, Math.max(0, 60 * (winCount - 10)));
+    const barrierWeight = Math.max(15, Math.min(otherWeight, midWeight, bigWeight));
 
-    const barrierWeight = Math.max(15,Math.min(otherWeight, midWeight, bigWeight));
-  
-    // 重みに基づいて配列を作成
     const weightedArray = [
       ...Array(otherWeight).fill(array.find(choice => choice.name === "グー")),
       ...Array(otherWeight).fill(array.find(choice => choice.name === "チョキ")),
@@ -80,9 +74,8 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       ...Array(midWeight).fill(array.find(choice => choice.name === "ザリガニ")),
       ...Array(midWeight).fill(array.find(choice => choice.name === "金の玉")),
       ...Array(midWeight).fill(array.find(choice => choice.name === "札"))
-    ].filter(Boolean) as ChoiceType[]; // `filter(Boolean)` は null の要素を除去
-  
-    // 配列をシャッフルし、ランダムな要素を選択
+    ].filter(Boolean) as ChoiceType[];
+
     const shuffled = weightedArray.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, count);
   };
@@ -99,20 +92,16 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
   }, [computerChoices, winCount]);
 
   const handlePlayerChoice = (playerIndex: number) => {
-    // ランダムにコンピュータのインデックスを選ぶ
     const randomComputerIndex = Math.floor(Math.random() * computerChoices.length);
 
     const playerChoice = playerChoicesState[playerIndex];
     const computerChoice = computerChoices[randomComputerIndex];
 
-    // 勝敗判定
     const result = getResult(playerChoice, computerChoice);
 
-    // プレイヤーの手とコンピュータの手を交換する
     const newPlayerChoices = [...playerChoicesState];
     const newComputerChoices = [...computerChoices];
-    
-    // 交換
+
     newPlayerChoices[playerIndex] = computerChoice;
     newComputerChoices[randomComputerIndex] = playerChoice;
 
@@ -123,17 +112,13 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
     if (result === "win") {
       setWinCount((prev) => prev + 1);
-      setDrawCount(0); 
+      setDrawCount(0);
     } else if (result === "lose") {
       setLife((prev) => prev - 1);
-      setDrawCount(0); 
-      /*if (life - 1 <= 0) {
-        setShowScoreWindow(true);
-      }*/
+      setDrawCount(0);
     } else if (result === "draw") {
       setDrawCount((prev) => prev + 1);
       if (drawCount + 1 >= 3) {
-        // 3回連続のあいこが発生した場合の処理
         setWinCount((prev) => prev + 1);
         setDrawCount(0);
         setShowResult({ playerChoice, computerChoice, result: "reset" });
@@ -141,13 +126,10 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       }
     }
 
-    // 勝敗結果をモーダルに表示
     setShowResult({ playerChoice, computerChoice, result });
 
     if (result !== "draw") {
       setIsShuffling(true);
-      //const newComputerChoices = getRandomChoices(choices, 3, winCount);
-      //setComputerChoices(newComputerChoices);
       setIsShuffling(false);
     }
   };
@@ -159,7 +141,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
   const closeScoreWindow = () => {
     setShowScoreWindow(false);
-    onBackClick(); // ホーム画面に戻る
+    onBackClick();
   };
 
   const closeDescription = () => setShowDescription(null);
@@ -168,29 +150,27 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
     setShowResult(null);
     if (selectedCardIndex !== null) {
       setSlidingInIndex(selectedCardIndex);
-      setTimeout(() => setSlidingInIndex(null), 600); // アニメーションが終わったらリセット
-      setSelectedCardIndex(null); // 元の位置インデックスをリセット
+      setTimeout(() => setSlidingInIndex(null), 600 / 1000 * 1000);
+      setSelectedCardIndex(null);
     }
-    
 
     if (drawCount === 0) {
       getRandomEnemyImage();
       setIsEnemyImageAnimating(true);
-      setIsShuffling(true); // 手札アニメーションも同時に開始
-  
+      setIsShuffling(true);
       setTimeout(() => {
-          setComputerChoices(getRandomChoices(choices, 3, winCount));
-          setTimeout(() => setIsShuffling(false), 600); // アニメーションが完了したら停止
-          setTimeout(() => setIsEnemyImageAnimating(false), 600);
-      }, 100);
+        setComputerChoices(getRandomChoices(choices, 3, winCount));
+        setTimeout(() => setIsShuffling(false), 600 / 1000 * 1000);
+        setTimeout(() => setIsEnemyImageAnimating(false), 600 / 1000 * 1000);
+      }, 100 / 1000 * 1000);
     }
 
     if (life <= 0) {
-      setTimeout(() => setShowScoreWindow(true), 100); // ResultWindowが閉じた後にScoreWindowを表示
+      setTimeout(() => setShowScoreWindow(true), 100 / 1000 * 1000);
     }
 
     if (slidingInIndex !== null) {
-      setTimeout(() => setSlidingInIndex(null), 600);
+      setTimeout(() => setSlidingInIndex(null), 600 / 1000 * 1000);
     }
   };
 
@@ -209,53 +189,51 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         width: "100%",
         backgroundColor: "black",
         color: "white",
-        padding: "10px 0",
+        padding: "0.625rem 0", // 10px 0px
         textAlign: "center",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
       }}>
-        {/* 降参ボタンを左端に配置 */}
-        <button 
-          onClick={handleForfeit} 
-          style={{ 
-            color: "white", 
-            border: "1px solid white",  
-            background: "transparent", 
-            cursor: "pointer", 
+        <button
+          onClick={handleForfeit}
+          style={{
+            color: "white",
+            border: "0.0625rem solid white", // 1px
+            background: "transparent",
+            cursor: "pointer",
             position: "absolute",
-            left: "20px" 
+            left: "1.25rem" // 20px
           }}
         >
           降参
         </button>
-
-        {/* タイトルを中央に配置 */}
         <div>Trading Janken</div>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(60px)" }}>   
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(3.75rem)" }}> {/* 60px → 3.75rem */}
         <div
           className={`${isEnemyImageAnimating ? "fade-in-blur" : ""}`}
           style={{
             borderRight: "none",
-            padding: "5px 10px",
-            marginRight: "-30px",
-            marginLeft: "10px",
+            padding: "0.3125rem 0.625rem", //5px 10px
+            marginRight: "-1.875rem", // -30px
+            marginLeft: "0.625rem", //10px
             color: "black",
-            width: "200px",
+            width: "12.5rem", //200px
             textAlign: "left",
             background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 30%)`,
           }}
         >
-          <p style={{ fontWeight: "bold", marginBottom: "40px", marginLeft: "10px" }}>ランダムロボ</p>
+          <p style={{ fontWeight: "bold", marginBottom: "2.5rem", marginLeft: "0.625rem" /*10px*/ }}>ランダムロボ</p>
         </div>
         <div className={`enemy-image-container ${isEnemyImageAnimating ? "slide-in" : ""}`}>
-          <img src={enemyImage} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
+          <img src={enemyImage} alt="Computer" style={{ width: "6.5625rem", height: "7.8125rem", zIndex: 1 }} /> 
         </div>
       </div>
 
-      <div className="computer-card-container" style={{ marginTop: "20px", marginBottom:"40px" }}>
+      <div className="computer-card-container" style={{ marginTop: "1.25rem", marginBottom:"2.5rem" }}>
+        {/* 20px→1.25rem, 40px→2.5rem */}
         {computerChoices.map((choice, index) => (
           <div key={index} className={isShuffling ? "computer-card" : ""}>
             <JankenCard
@@ -280,23 +258,20 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         ))}
       </div>
 
-
-      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-10px)" }}>
-        <img src={"/player.png"} alt="Computer" style={{ width: "105px", height: "125px", zIndex: 1 }} />
-        
+      <div style={{ display: "flex", alignItems: "center", transform: "translateX(-0.625rem)" }}> {/* -10px→-0.625rem */}
+        <img src={"/player.png"} alt="Computer" style={{ width: "6.5625rem", height: "7.8125rem", zIndex: 1 }} />
         <div style={{
-          //border: "1px solid black", // 上、右、下にのみボーダーを表示
           borderLeft: "none",
-          padding: "0px 10px",
-          paddingLeft:"120px",
-          marginLeft: "-60px",
+          padding: "0rem 0.625rem",
+          paddingLeft:"7.5rem", //120px→7.5rem
+          marginLeft: "-3.75rem", //-60px→-3.75rem
           color: "black",
-          width: "120px",
+          width: "7.5rem", //120px→7.5rem
           textAlign: "left",
           background: `linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255,0.5) 30%)`,
         }}>
-          <p style={{fontWeight: "bold" }}>You</p>
-          <div style={{margin:"-3px"}}>
+          <p style={{ fontWeight: "bold" }}>You</p>
+          <div style={{margin:"-0.1875rem"}}>{/* -3px → -0.1875rem */}
             {Array.from({ length: life }).map((_, index) => (
               <span
                 key={index}
@@ -307,17 +282,13 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             ))}
           </div>
 
-          <div style={{margin:"-3px"}}>
+          <div style={{margin:"-0.1875rem"}}>
             <span className="star">★</span> × {winCount}
           </div>
         </div>
-        
       </div>
 
       <h5>カードを確認：右クリック（PC）、長押し（スマホ）</h5>
-
-
-      
 
       {showDescription && (
         <div
@@ -338,8 +309,8 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
           <div
             style={{
               backgroundColor: "#fff",
-              padding: "20px",
-              borderRadius: "10px",
+              padding: "1.25rem", //20px
+              borderRadius: "0.625rem", //10px
               maxWidth: "80%",
               textAlign: "center",
             }}
@@ -349,15 +320,14 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         </div>
       )}
 
-    <ResultWindow showResult={showResult} drawCount = {drawCount} closeResult={closeResult} />
+      <ResultWindow showResult={showResult} drawCount={drawCount} closeResult={closeResult} />
 
-    {showScoreWindow && (
-      <ScoreWindow
-        winCount={winCount}
-        closeScoreWindow={closeScoreWindow}
-      />
-    )}
-      
+      {showScoreWindow && (
+        <ScoreWindow
+          winCount={winCount}
+          closeScoreWindow={closeScoreWindow}
+        />
+      )}
 
     </div>
   );

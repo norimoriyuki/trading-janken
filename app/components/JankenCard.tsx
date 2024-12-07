@@ -47,29 +47,27 @@ export default function JankenCard({
       onContextMenu={onRightClick}
       style={{
         color: "black",
-        margin: "0 10px",
-        padding: "10px",
-        border: `4px solid ${borderColor}`,//border: "1px solid #ddd",
-        borderRadius: "15px",
+        margin: "0 1rem",
+        padding: "1rem",
+        border: `0.2rem solid ${borderColor}`,//border: "1px solid #ddd",
+        borderRadius: "1rem",
         backgroundColor: "#f9f9f9", // 固定の背景色
         cursor: "pointer",
-        width: "80px",
-        height: "120px",
+        width: "5rem",
+        height: "8rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-around",
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2)",
         position: "relative",
         overflow: "hidden",
       }}
     >
       <div
         style={{
-          width: "80px",
-          height: "80px",
-          //borderRadius: "8px", // 角を少し丸める
-          //border: `4px solid ${borderColor}`, // 枠の色をタイプに基づいて設定
+          width: "5rem",
+          height: "5rem",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -77,7 +75,7 @@ export default function JankenCard({
       >
         <Image src={choice.img} alt={choice.name} width={60} height={60} />
       </div>
-      <p style={{ marginTop: "10px", fontWeight: "bold" }}>{choice.name}</p>
+      <p style={{ marginTop: "0.8rem", fontWeight: "bold" }}>{choice.name}</p>
     </div>
   );
 }

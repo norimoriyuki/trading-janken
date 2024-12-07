@@ -43,20 +43,19 @@
   
   .computer-card-container {
     display: flex;
-    gap: 0px; /* 重ねるためにgapを0に設定 */
     justify-content: flex-start;
     position: relative;
     width: 100%;
-    max-width: 300px; /* 横に展開する幅 */
-    margin-top: 20px;
-    transform: translateX(-35px);
+    max-width: 30rem;
+    margin-top: 1rem;
+    transform: translateX(0rem);
   }
   
   .player-card-container {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
-    transform: translateX(25px);
+    margin: 1rem 0;
+    transform: translateX(2rem);
   }
   
 
@@ -89,7 +88,7 @@
   @keyframes slideInFromTop {
     0% {
       opacity: 0;
-      transform: translateY(-100px);
+      transform: translateY(-8rem);
     }
     100% {
       opacity: 1;
@@ -123,7 +122,7 @@
   @keyframes fadeInBlur {
     0% {
       opacity: 0;
-      filter: blur(5px);
+      filter: blur(0.5rem);
     }
     100% {
       opacity: 1;
