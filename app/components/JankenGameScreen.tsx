@@ -269,14 +269,16 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
 
       <div className="player-card-container" style={{ width: "100%" }}>
         {playerChoicesState.map((choice, index) => (
-          <JankenCard
-            key={`player-${index}`}
-            choice={choice}
-            onClick={() => handlePlayerChoice(index)}
-            onRightClick={(event) => handleRightClick(event, choice.description)}
-            //isPlayerHand={true}
-            className={slidingInIndex === index ? "card-slide-in" : ""}
-          />
+          <div key={index}>
+            <JankenCard
+              key={`player-${index}`}
+              choice={choice}
+              onClick={() => handlePlayerChoice(index)}
+              onRightClick={(event) => handleRightClick(event, choice.description)}
+              //isPlayerHand={true}
+              className={slidingInIndex === index ? "card-slide-in" : ""}
+            />
+          </div>
         ))}
       </div>
 
