@@ -3,7 +3,7 @@
 import { useState } from "react";
 import JankenGameScreen from "./components/JankenGameScreen";
 import ScoreboardScreen from "./components/ScoreboardScreen";
-import { choices, ChoiceType } from "./components/choices";
+import { choices } from "./components/choices";
 
 export default function Home() {
   const rules = `使ったカードが交換されるカードゲーム
