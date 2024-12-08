@@ -11,7 +11,7 @@ export default function Home() {
     `;
 
   const [screen, setScreen] = useState<"start" | "game" | "scoreboard" | "rules">("start");
-  const [playerChoices, setPlayerChoices] = useState<ChoiceType[]>(choices.slice(0, 3));
+  const playerChoices= choices.slice(0, 3);
 
   const handleStartClick = () => setScreen("game");
   const handleScoreboardClick = () => setScreen("scoreboard");
