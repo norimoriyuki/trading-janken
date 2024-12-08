@@ -222,34 +222,37 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       <div style={{
         display: "flex",
         alignItems: "center",
-        transform: "translateX(20%)"
       }}>
+        <div style={{flex:1}}></div>
         <div
           className={`${isEnemyImageAnimating ? "fade-in-blur" : ""}`}
           style={{
-            borderRight: "none",
+            flex:1,
             padding: "1% 2%",
             marginRight: "-6%",
             marginLeft: "2%",
             color: "black",
             width: "20vh",
+            height:"8vh",
             textAlign: "left",
             background: `linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 30%)`,
           }}
         >
-          {/* 2.5rem(約40px)→約8% margin-bottom, 10px→2% margin-left */}
           <p style={{ fontWeight: "bold", marginBottom: "8%", marginLeft: "2%" }}>ランダムロボ</p>
         </div>
-        <div style={{ 
-          position: "relative", 
-          width: "15vh", 
-          height: "15vh"
-        }}>
+        <div 
+          className={`enemy-image-container ${isEnemyImageAnimating ? "slide-in" : ""}`}
+          style={{ 
+            flex:1,
+            position: "relative", 
+            width: "15vh", 
+            height: "15vh"
+          }}>
           <Image 
             src={enemyImage} 
             alt="Computer" 
             fill 
-            style={{ objectFit: "contain", zIndex: 1 }} 
+            style={{ objectFit: "contain"}} 
           />
         </div>
       </div>
@@ -285,17 +288,17 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
       <div style={{
         display: "flex",
         alignItems: "center",
-        // -10px→約-2%
-        transform: "translateX(-5rem)"
       }}>
         <div style={{ 
+          flex:1,
           position: "relative", 
           width: "20vh", 
           height: "15vh" // ここで明確な高さを指定する
         }}>
-          <Image src={"/player.png"} alt="player" fill style={{objectFit: "contain", zIndex: 1 }} />
+          <Image src={"/player.png"} alt="player" fill style={{objectFit: "contain" }} />
         </div>
         <div style={{
+          flex:1,
           borderLeft: "none",
           paddingLeft: "3rem",
           marginLeft: "-2rem",
@@ -320,6 +323,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             <span className="star">★</span> × {winCount}
           </div>
         </div>
+        <div style={{flex:1}}></div>
       </div>
 
       <h5>カードを確認：右クリック（PC）、長押し（スマホ）</h5>

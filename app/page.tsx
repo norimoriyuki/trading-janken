@@ -34,15 +34,17 @@ export default function Home() {
   const handleStartClick = () => setScreen("game");
   const handleScoreboardClick = () => setScreen("scoreboard");
   const handleBackClick = () => setScreen("start");
-
+  //width: "100%",
+  //height: "100vh",
+  
+  //flexDirection: "column",
+  //overflowY: "auto",
   return (
     <>
       {isWide ? (
         <div
           style={{
             height: "100vh",
-            width: "100%",
-            overflowY: "scroll",
             backgroundColor: "gray",
             display: "flex",
             justifyContent: "center",
@@ -51,9 +53,9 @@ export default function Home() {
         >
           <div
             style={{
-              width: "100%",
+              height: "100%",
               maxWidth: "31.25rem", 
-              aspectRatio: "9 / 16",
+              //aspectRatio: "9 / 16",
               backgroundColor: "#d3d3d3",
               display: "flex",
               alignItems: "center",
