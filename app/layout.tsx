@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/react";
+import { ChakraProvider } from "@chakra-ui/react"
 import "./globals.css";
 
 export default function RootLayout({
