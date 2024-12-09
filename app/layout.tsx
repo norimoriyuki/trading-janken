@@ -11,6 +11,7 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <title>Trading Janken</title>
+        <link rel="manifest" href="/manifest.json" />
         <meta name="description" content="超簡単なTCG風ゲーム" />
       </head>
       <body>
