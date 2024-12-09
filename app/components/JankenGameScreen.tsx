@@ -223,7 +223,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
         display: "flex",
         alignItems: "center",
       }}>
-        <div style={{flex:1}}></div>
+        <div style={{flex:0.3}}></div>
         <div
           className={`${isEnemyImageAnimating ? "fade-in-blur" : ""}`}
           style={{
@@ -323,7 +323,7 @@ export default function JankenGameScreen({ onBackClick, playerChoices }: JankenG
             <span className="star">★</span> × {winCount}
           </div>
         </div>
-        <div style={{flex:1}}></div>
+        <div style={{flex:0.3}}></div>
       </div>
 
       <h5>カードを確認：右クリック（PC）、長押し（スマホ）</h5>
