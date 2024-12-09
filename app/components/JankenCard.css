@@ -30,3 +30,8 @@
     }
   }
   
+  
+.card-image-warapper {
+  -webkit-touch-callout: none;
+  position: relative;
+}

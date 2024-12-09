@@ -64,8 +64,10 @@ export default function JankenCard({
         overflow: "hidden",
       }}
     >
-    <div style={{
-      position: "relative",
+    <div
+      className="card-image-warapper" 
+      style={{
+      
       width: "5rem",
       height: "5rem",
       display: "flex",
